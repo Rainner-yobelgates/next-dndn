@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import Carousel from "./components/Hero/Index";
 import Testimoni from "./components/Testimoni/Index";
@@ -5,14 +6,20 @@ import Faq from "./components/Faq/Index";
 import Product from "./components/Product/Index";
 import Footer from "./components/Footer/Index";
 import Link from "next/link";
+import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 
 export default function Home() {
   return (
    <>
    <section>
     <Carousel />
+    <div className="flex justify-center pt-14 gap-5">
+        <FaFacebook size={36} color="#1877F2" />
+        <FaInstagram size={36} color="#E1306C"/>
+        <FaTiktok size={36} />
+    </div>
    </section>
-   <section className="pt-24 lg:pt-28">
+   <section className="pt-14 lg:pt-18">
     <div className="container mx-auto">
       <h1 className="text-center font-bold text-2xl lg:text-4xl mb-10 uppercase">Testimoni</h1>
       <Testimoni />
