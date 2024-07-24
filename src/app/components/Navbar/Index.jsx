@@ -1,6 +1,7 @@
 "use client"
 import { useState } from 'react';
 import Link from 'next/link';
+import { IoMdCart } from 'react-icons/io';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -57,46 +58,49 @@ export default function Navbar() {
                 Navbar
               </Link>
             <div className="hidden sm:flex ml-auto space-x-4 items-center">
-            <Link href="/" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-              Home
-            </Link>
-            <Link href="/contact" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-              New Products
-            </Link>
-            <Link href="/contact" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-              Testimoni
-            </Link>
-            <details className="dropdown">
-              <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn btn-ghost h-[38px] min-h-0">
-                Women
-              </summary>
-              <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                <li><Link href="">Item 1</Link></li>
-                <li><Link href="">Item 2</Link></li>
-              </ul>
-            </details>
-            <details className="dropdown">
-              <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn btn-ghost h-[38px] min-h-0">
-                Men
-              </summary>
-              <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                <li><Link href="">Item 1</Link></li>
-                <li><Link href="">Item 2</Link></li>
-              </ul>
-            </details>
-            <details className="dropdown">
-              <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn btn-ghost h-[38px] min-h-0">
-                Brands
-              </summary>
-              <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                <li><Link href="">Item 1</Link></li>
-                <li><Link href="">Item 2</Link></li>
-              </ul>
-            </details>
-            <Link href="/contact" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-              Terms Condition & FAQ
-            </Link>
-          </div>
+              <Link href="/" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                Home
+              </Link>
+              <Link href="/contact" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                New Products
+              </Link>
+              <Link href="/contact" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                Testimoni
+              </Link>
+              <details className="dropdown">
+                <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn btn-ghost h-[38px] min-h-0">
+                  Women
+                </summary>
+                <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                  <li><Link href="">Item 1</Link></li>
+                  <li><Link href="">Item 2</Link></li>
+                </ul>
+              </details>
+              <details className="dropdown">
+                <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn btn-ghost h-[38px] min-h-0">
+                  Men
+                </summary>
+                <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                  <li><Link href="">Item 1</Link></li>
+                  <li><Link href="">Item 2</Link></li>
+                </ul>
+              </details>
+              <details className="dropdown">
+                <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn btn-ghost h-[38px] min-h-0">
+                  Brands
+                </summary>
+                <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                  <li><Link href="">Item 1</Link></li>
+                  <li><Link href="">Item 2</Link></li>
+                </ul>
+              </details>
+              <Link href="/contact" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                Terms Condition & FAQ
+              </Link>
+              <Link href="/cart" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              <IoMdCart size={20} />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

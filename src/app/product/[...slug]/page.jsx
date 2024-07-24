@@ -50,10 +50,14 @@ const page = () => {
                     <p className="text-md text-slate-500 font-medium mb-10">Tax included. Shipping calculated at checkout</p>
                     <label className="block text-sm font-medium text-slate-500 mb-2">Quantity</label>
                     <input type="number"  className="w-40 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-10" placeholder="1" min="1" />
-                    <div className="flex gap-4">
-                        <button className="btn btn-wide uppercase bg-green-600 text-white hover:bg-slate-700">Shop By whatsapp</button>
+                    <div className="lg:flex lg:gap-4">
+                        <button className="btn btn-wide uppercase bg-green-600 text-white hover:bg-slate-700 mb-2">Shop By whatsapp</button>
                         <button className="btn btn-wide uppercase">Add to cart</button>
                     </div>
+                    <hr className="my-10" />
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam aliquam temporibus libero nam, similique in ipsum non, soluta sit est odit ratione nobis ut optio cupiditate quae deserunt sed, dicta iste! Commodi exercitationem, impedit ipsam voluptates animi accusamus temporibus quas incidunt possimus illum consectetur corrupti, labore dolore in. Eius quis sapiente, nemo asperiores voluptatem laboriosam, dolorem ab ratione culpa veniam quisquam eos laborum quidem alias facilis ducimus voluptate dolores modi, fugiat reiciendis? Vitae magni ipsa ad architecto pariatur! Eius ex, ipsam enim fuga quo cum delectus similique, ratione alias nulla eos facere repellat minus at quos amet magnam dolorem? Nulla.
+                    </p>
                 </div>
             </div>
             <h1 className="text-center font-bold text-2xl lg:text-4xl mb-10 uppercase">You may also like</h1>
