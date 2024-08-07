@@ -3,7 +3,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { IoMdCart } from 'react-icons/io';
 
-export default function Navbar() {
+export default function Navbar({brands}) {
+  
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -69,7 +70,7 @@ export default function Navbar() {
               </Link>
               <details className="dropdown">
                 <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn btn-ghost h-[38px] min-h-0">
-                  Women
+                  Woman
                 </summary>
                 <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                   <li><Link href="">Item 1</Link></li>
@@ -78,7 +79,7 @@ export default function Navbar() {
               </details>
               <details className="dropdown">
                 <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn btn-ghost h-[38px] min-h-0">
-                  Men
+                  man
                 </summary>
                 <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                   <li><Link href="">Item 1</Link></li>
@@ -90,15 +91,15 @@ export default function Navbar() {
                   Brands
                 </summary>
                 <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                  <li><Link href="">Item 1</Link></li>
-                  <li><Link href="">Item 2</Link></li>
+                  {brands?.payload.map((brand, index) => {
+                    return (
+                      <li key={index}><Link href="">{brand.name}</Link></li>
+                    )
+                  })}
                 </ul>
               </details>
               <Link href="/contact" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                 Terms Condition & FAQ
-              </Link>
-              <Link href="/cart" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-              <IoMdCart size={20} />
               </Link>
             </div>
           </div>
@@ -120,8 +121,8 @@ export default function Navbar() {
               Terms Condition & FAQ
             </Link>
             <details className="dropdown block">
-              <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn btn-ghost h-[38px] min-h-0">
-                Women
+              <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn btn-ghost h-[38px] min-h-0 w-full justify-start">
+                Woman
               </summary>
               <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                 <li><Link href="">Item 1</Link></li>
@@ -129,8 +130,8 @@ export default function Navbar() {
               </ul>
             </details>
             <details className="dropdown block">
-              <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn btn-ghost h-[38px] min-h-0">
-                Men
+              <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn btn-ghost h-[38px] min-h-0 w-full justify-start">
+                man
               </summary>
               <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                 <li><Link href="">Item 1</Link></li>
@@ -138,7 +139,7 @@ export default function Navbar() {
               </ul>
             </details>
             <details className="dropdown block">
-              <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn btn-ghost h-[38px] min-h-0">
+              <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn btn-ghost h-[38px] min-h-0 w-full justify-start">
                 Brands
               </summary>
               <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">

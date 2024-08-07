@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/Navbar/Index";
+import FetchNavbar from "@/utils/FetchNavbar";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -15,10 +15,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <Navbar />
+        <FetchNavbar />
         {children}
         </body>
     </html>

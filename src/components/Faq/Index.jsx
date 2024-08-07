@@ -2,7 +2,7 @@ import React from 'react'
 
 const Faq = () => {
   return (
-    <div className="px-4">
+    <div className="mx-5">
       <div className="collapse collapse-plus bg-base-200 mb-3 p-1">
         <input type="radio" name="my-accordion-3" defaultChecked />
         <div className="collapse-title text-md lg:text-lg font-semibold">Apakah items di DNDN Luxury original? Bagaimana dengan kualitasnya?</div>

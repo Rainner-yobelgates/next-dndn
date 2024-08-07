@@ -1,5 +1,5 @@
 "use client"
-import Product from '@/app/components/Product/Index';
+import Product from '@/components/Product/Index';
 import Image from 'next/image'
 import Link from 'next/link';
 import { useState } from 'react'
@@ -45,7 +45,7 @@ const page = () => {
                 </div>
                 <div className="w-full lg:w-1/2 px-5 my-10">
                     <h1 className="text-4xl font-semibold mb-2 mt-5">Jordan Retro 6 G</h1>
-                    <h2 className="text-lg font-semibold mb-5">Men's Shoes</h2>
+                    <h2 className="text-lg font-semibold mb-5">man's Shoes</h2>
                     <h2 className="text-lg font-semibold mb-1">IDR 10.000.000</h2>
                     <p className="text-md text-slate-500 font-medium mb-10">Tax included. Shipping calculated at checkout</p>
                     <label className="block text-sm font-medium text-slate-500 mb-2">Quantity</label>
