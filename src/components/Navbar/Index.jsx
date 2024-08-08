@@ -3,10 +3,10 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { IoMdCart } from 'react-icons/io';
 
-export default function Navbar({brands}) {
+export default function Navbar({brands, manBrands, womanBrands, manCategories, womanCategories}) {
   
   const [isOpen, setIsOpen] = useState(false);
-
+  
   return (
     <nav className="bg-gray-800">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -69,25 +69,69 @@ export default function Navbar({brands}) {
                 Testimoni
               </Link>
               <details className="dropdown">
-                <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn btn-ghost h-[38px] min-h-0">
+                <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0">
                   Woman
                 </summary>
                 <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                  <li><Link href="">Item 1</Link></li>
-                  <li><Link href="">Item 2</Link></li>
+                  <details className="dropdown">
+                    <summary className="text-slate-700 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0">
+                      All Woman Category
+                    </summary>
+                    <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                    {womanCategories?.payload.map((womanCategory, index) => {
+                      return (
+                        <li key={index}><Link href="">{womanCategory.category.name}</Link></li>
+                      )
+                    })}
+                    </ul>
+                  </details>
+                  <details className="dropdown">
+                    <summary className="text-slate-700 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0">
+                      All Woman Brands
+                    </summary>
+                    <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                    {womanBrands?.payload.map((womanBrand, index) => {
+                      return (
+                        <li key={index}><Link href="">{womanBrand.brand.name}</Link></li>
+                      )
+                    })}
+                    </ul>
+                  </details>
                 </ul>
               </details>
               <details className="dropdown">
-                <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn btn-ghost h-[38px] min-h-0">
-                  man
+                <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0">
+                  Man
                 </summary>
                 <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                  <li><Link href="">Item 1</Link></li>
-                  <li><Link href="">Item 2</Link></li>
+                  <details className="dropdown">
+                    <summary className="text-slate-700 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0">
+                      All Man Category
+                    </summary>
+                    <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                    {manCategories?.payload.map((manCategory, index) => {
+                      return (
+                        <li key={index}><Link href="">{manCategory.category.name}</Link></li>
+                      )
+                    })}
+                    </ul>
+                  </details>
+                  <details className="dropdown">
+                    <summary className="text-slate-700 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0">
+                      All Man Brands
+                    </summary>
+                    <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                    {manBrands?.payload.map((manBrand, index) => {
+                      return (
+                        <li key={index}><Link href="">{manBrand.brand.name}</Link></li>
+                      )
+                    })}
+                    </ul>
+                  </details>
                 </ul>
               </details>
               <details className="dropdown">
-                <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn btn-ghost h-[38px] min-h-0">
+                <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0">
                   Brands
                 </summary>
                 <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
@@ -121,7 +165,7 @@ export default function Navbar({brands}) {
               Terms Condition & FAQ
             </Link>
             <details className="dropdown block">
-              <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn btn-ghost h-[38px] min-h-0 w-full justify-start">
+              <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0 w-full justify-start">
                 Woman
               </summary>
               <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
@@ -130,7 +174,7 @@ export default function Navbar({brands}) {
               </ul>
             </details>
             <details className="dropdown block">
-              <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn btn-ghost h-[38px] min-h-0 w-full justify-start">
+              <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0 w-full justify-start">
                 man
               </summary>
               <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
@@ -139,12 +183,15 @@ export default function Navbar({brands}) {
               </ul>
             </details>
             <details className="dropdown block">
-              <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn btn-ghost h-[38px] min-h-0 w-full justify-start">
+              <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0 w-full justify-start">
                 Brands
               </summary>
               <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                <li><Link href="">Item 1</Link></li>
-                <li><Link href="">Item 2</Link></li>
+                {brands?.payload.map((brand, index) => {
+                    return (
+                      <li key={index}><Link href="">{brand.name}</Link></li>
+                    )
+                })}
               </ul>
             </details>
         </div>
