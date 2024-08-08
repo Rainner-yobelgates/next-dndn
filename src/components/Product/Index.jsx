@@ -62,10 +62,10 @@ const Product = ({api}) => {
                             className="object-cover w-full h-full" // Ensure the image covers the container
                             />
                         </figure>
-                        <div className="card-body">
-                            <h2 className="card-title">{product.name}</h2>
-                            <p>{product.brand.name}</p>
-                            <p className="font-bold text-sm">IDR {formatCurrency(product.price)}</p>
+                        <div className="card-body text-center gap-0">
+                            <h2 className="text-md">{product.name}</h2>
+                            <p className="font-bold text-sm mb-3">IDR {formatCurrency(product.price)}</p>
+                            <p className="font-bold text-sm">{product.brand.name}</p>
                         </div>
                     </div>
                 </Link>

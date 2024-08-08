@@ -1,7 +1,15 @@
 import React from 'react'
 import SearchBar from '@/components/SearchBar/Index'
+import { getData } from '@/libs/dndn-api';
+import Link from 'next/link';
+import formatCurrency from '@/utils/FormatCurrency';
+import Image from 'next/image';
 
-const page = () => {
+const page = async ({ params: { slug } }) => {
+  const products = await getData(`collections/${slug}`, "")
+  const payloads = { products }
+  
+  
   const data = {
     products: [
       { name: 'Apple iPhone' },
@@ -52,63 +60,32 @@ const page = () => {
         </div>
         <div className="lg:w-[70%] w-full ">
           <SearchBar data={data} />
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className="card bg-base-100 w-full shadow-xl">
-              <figure>
-                <img
-                  src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                  alt="Shoes" />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">Shoes!</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Buy Now</button>
-                </div>
-              </div>
-            </div>
-            <div className="card bg-base-100 w-full shadow-xl">
-              <figure>
-                <img
-                  src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                  alt="Shoes" />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">Shoes!</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Buy Now</button>
-                </div>
-              </div>
-            </div>
-            <div className="card bg-base-100 w-full shadow-xl">
-              <figure>
-                <img
-                  src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                  alt="Shoes" />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">Shoes!</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Buy Now</button>
-                </div>
-              </div>
-            </div>
-            <div className="card bg-base-100 w-full shadow-xl">
-              <figure>
-                <img
-                  src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                  alt="Shoes" />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">Shoes!</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Buy Now</button>
-                </div>
-              </div>
-            </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            {products.payload?.data.map((product, index) => {
+              console.log(product);
+              
+              return (
+                <Link href={''} key={product.id}>
+                  <div className="card bg-base-100 w-full shadow-xl">
+                    <figure className="flex h-64">
+                        <Image
+                          src={`https://api.al-miffa.or.id/storage/${product.images[0].path}`} // Dynamic path to your image
+                          alt="Shoes"
+                          layout="responsive"
+                          width={500} // Set a default width
+                          height={500} // Set a default height
+                          className="object-cover w-full h-full" // Ensure the image covers the container
+                          />
+                    </figure>
+                    <div className="card-body text-center gap-0">
+                      <h2 className="text-md">{product.name}</h2>
+                      <p className="font-bold text-sm mb-3">IDR {formatCurrency(product.price)}</p>
+                      <p className="font-bold text-sm">{product.brand.name}</p>
+                    </div>
+                  </div>
+                </Link>
+              )
+            })}
           </div>
         </div>
       </div>

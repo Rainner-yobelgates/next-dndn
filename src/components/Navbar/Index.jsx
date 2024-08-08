@@ -62,10 +62,10 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
               <Link href="/" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                 Home
               </Link>
-              <Link href="/contact" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              <Link href="/collections/new-arrival-collections" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                 New Products
               </Link>
-              <Link href="/contact" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              <Link href="/#testimoni" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                 Testimoni
               </Link>
               <details className="dropdown">
@@ -80,7 +80,7 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
                     <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                     {womanCategories?.payload.map((womanCategory, index) => {
                       return (
-                        <li key={index}><Link href="">{womanCategory.category.name}</Link></li>
+                        <li key={index}><Link href={`/collections/woman-collections?category=${womanCategory.category.name}`}>{womanCategory.category.name}</Link></li>
                       )
                     })}
                     </ul>
@@ -92,7 +92,7 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
                     <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                     {womanBrands?.payload.map((womanBrand, index) => {
                       return (
-                        <li key={index}><Link href="">{womanBrand.brand.name}</Link></li>
+                        <li key={index}><Link href={`/collections/woman-collections?brand=${womanBrand.brand.name}`}>{womanBrand.brand.name}</Link></li>
                       )
                     })}
                     </ul>
@@ -111,7 +111,7 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
                     <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                     {manCategories?.payload.map((manCategory, index) => {
                       return (
-                        <li key={index}><Link href="">{manCategory.category.name}</Link></li>
+                        <li key={index}><Link href={`/collections/man-collections?category=${manCategory.category.name}`}>{manCategory.category.name}</Link></li>
                       )
                     })}
                     </ul>
@@ -123,7 +123,7 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
                     <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                     {manBrands?.payload.map((manBrand, index) => {
                       return (
-                        <li key={index}><Link href="">{manBrand.brand.name}</Link></li>
+                        <li key={index}><Link href={`/collections/man-collections?brand=${manBrand.brand.name}`}>{manBrand.brand.name}</Link></li>
                       )
                     })}
                     </ul>
@@ -142,7 +142,7 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
                   })}
                 </ul>
               </details>
-              <Link href="/contact" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              <Link href="/#faq" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                 Terms Condition & FAQ
               </Link>
             </div>
@@ -155,13 +155,13 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
             <Link href="/about" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium">
                 About
             </Link>
-            <Link href="/contact" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium">
+            <Link href="/collections/new-arrival-collections" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium">
               New Products
             </Link>
-            <Link href="/contact" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium">
+            <Link href="/#testimoni" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium">
               Testimoni
             </Link>
-            <Link href="/contact" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium">
+            <Link href="/#faq" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium">
               Terms Condition & FAQ
             </Link>
             <details className="dropdown block">
@@ -169,18 +169,62 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
                 Woman
               </summary>
               <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                <li><Link href="">Item 1</Link></li>
-                <li><Link href="">Item 2</Link></li>
-              </ul>
+                  <details className="dropdown">
+                    <summary className="text-slate-700 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0">
+                      All Woman Category
+                    </summary>
+                    <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                    {womanCategories?.payload.map((womanCategory, index) => {
+                      return (
+                        <li key={index}><Link href={`/collections/woman-collections?category=${womanCategory.category.name}`}>{womanCategory.category.name}</Link></li>
+                      )
+                    })}
+                    </ul>
+                  </details>
+                  <details className="dropdown">
+                    <summary className="text-slate-700 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0">
+                      All Woman Brands
+                    </summary>
+                    <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                    {womanBrands?.payload.map((womanBrand, index) => {
+                      return (
+                        <li key={index}><Link href={`/collections/woman-collections?brand=${womanBrand.brand.name}`}>{womanBrand.brand.name}</Link></li>
+                      )
+                    })}
+                    </ul>
+                  </details>
+                </ul>
             </details>
             <details className="dropdown block">
               <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0 w-full justify-start">
-                man
+                Man
               </summary>
               <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                <li><Link href="">Item 1</Link></li>
-                <li><Link href="">Item 2</Link></li>
-              </ul>
+                  <details className="dropdown">
+                    <summary className="text-slate-700 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0">
+                      All Man Category
+                    </summary>
+                    <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                    {manCategories?.payload.map((manCategory, index) => {
+                      return (
+                        <li key={index}><Link href={`/collections/man-collections?category=${manCategory.category.name}`}>{manCategory.category.name}</Link></li>
+                      )
+                    })}
+                    </ul>
+                  </details>
+                  <details className="dropdown">
+                    <summary className="text-slate-700 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0">
+                      All Man Brands
+                    </summary>
+                    <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                    {manBrands?.payload.map((manBrand, index) => {
+                      return (
+                        <li key={index}><Link href={`/collections/man-collections?brand=${manBrand.brand.name}`}>{manBrand.brand.name}</Link></li>
+                      )
+                    })}
+                    </ul>
+                  </details>
+                </ul>
             </details>
             <details className="dropdown block">
               <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0 w-full justify-start">
