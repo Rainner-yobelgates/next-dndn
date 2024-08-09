@@ -1,30 +1,34 @@
 'use client'
+import { getData } from '@/libs/dndn-api';
+import Link from 'next/link';
 import { useState } from 'react';
 
-const SearchBar = ({ data }) => {
+const SearchBar = () => {
   const [query, setQuery] = useState('');
   const [filteredResults, setFilteredResults] = useState({
     products: [],
-    collections: []
+    manCollections: [],
+    womanCollections: []
   });
 
-  const handleSearch = (event) => {
+  const handleSearch = async (event) => {
     const searchQuery = event.target.value;
     setQuery(searchQuery);
+    const searching = await getData("search", `keyword=${searchQuery}`);
 
-    if (searchQuery !== '') {
-      const products = data.products.filter((item) =>
-        item.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      const collections = data.collections.filter((item) =>
-        item.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setFilteredResults({ products, collections });
+
+    if (searching.success === true) {
+      const products  = searching.payload.products;
+      const manCollections = searching.payload.man_collections;
+      const womanCollections = searching.payload.woman_collections;
+      
+      setFilteredResults({ products, manCollections, womanCollections });
     } else {
-      setFilteredResults({ products: [], collections: [] });
+      setFilteredResults({ products: [], manCollections: [], womanCollections: [] });
     }
   };
-
+  
+  
   return (
     <div className="relative w-full max-w-md p-4 ml-auto">
       <input
@@ -36,28 +40,45 @@ const SearchBar = ({ data }) => {
       />
       {query && (
         <div className="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-lg shadow-lg mt-2 z-10">
-          {filteredResults.products.length > 0 && (
+          {filteredResults?.products.length > 0 && (
             <div className="p-4">
               <h3 className="text-lg font-semibold mb-2">Products</h3>
-              {filteredResults.products.map((item, index) => (
-                <div key={index} className="p-2 border-b border-gray-200 hover:bg-gray-100">
-                  {item.name}
-                </div>
+              {filteredResults?.products.map((item, index) => (
+                <Link key={index} href={`/product/${item.id}`} passHref>
+                  <div className="block p-2 border-b border-gray-200 hover:bg-gray-100">
+                    {item.name}
+                  </div>
+                </Link>
               ))}
             </div>
           )}
-          {filteredResults.collections.length > 0 && (
+          {filteredResults?.manCollections.length > 0 && (
             <div className="p-4">
-              <h3 className="text-lg font-semibold mb-2">Collections</h3>
-              {filteredResults.collections.map((item, index) => (
-                <div key={index} className="p-2 border-b border-gray-200 hover:bg-gray-100">
-                  {item.name}
-                </div>
+              <h3 className="text-lg font-semibold mb-2">Man Collections</h3>
+              {filteredResults?.manCollections.map((item, index) => (
+                <Link key={index} href={`/collection/${item.id}`} passHref>
+                  <div className="block p-2 border-b border-gray-200 hover:bg-gray-100">
+                    {item.name}
+                  </div>
+                </Link>
               ))}
             </div>
           )}
-          {filteredResults.products.length === 0 &&
-          filteredResults.collections.length === 0 && (
+          {filteredResults?.womanCollections.length > 0 && (
+            <div className="p-4">
+              <h3 className="text-lg font-semibold mb-2">Woman Collections</h3>
+              {filteredResults?.womanCollections.map((item, index) => (
+                <Link key={index} href={`/collection/${item.id}`} passHref>
+                  <div className="block p-2 border-b border-gray-200 hover:bg-gray-100">
+                    {item.name}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+          {filteredResults?.products.length === 0 &&
+          filteredResults?.womanCollections.length === 0 &&
+          filteredResults?.manCollections.length === 0 && (
             <div className="p-2 text-gray-500">No results found</div>
           )}
         </div>

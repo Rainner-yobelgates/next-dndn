@@ -5,25 +5,15 @@ import Link from 'next/link';
 import formatCurrency from '@/utils/FormatCurrency';
 import Image from 'next/image';
 
-const page = async ({ params: { slug } }) => {
-  const products = await getData(`collections/${slug}`, "")
-  const payloads = { products }
-  
-  
-  const data = {
-    products: [
-      { name: 'Apple iPhone' },
-      { name: 'Samsung Galaxy' },
-      { name: 'Google Pixel' },
-      // Tambahkan lebih banyak data produk sesuai kebutuhan
-    ],
-    collections: [
-      { name: 'Summer Collection' },
-      { name: 'Winter Collection' },
-      { name: 'Spring Collection' },
-      // Tambahkan lebih banyak data koleksi sesuai kebutuhan
-    ]
-  };
+const page = async ({ params, searchParams }) => {
+  let url = `collections/${params.slug}`;
+
+  let query = "" 
+  if (Object.keys(searchParams).length > 0) {
+    const queryString = new URLSearchParams(searchParams).toString().toLowerCase();
+    query += `${queryString}`;
+  }
+  const products = await getData(url, query);
   return (
     <div className="container mx-auto">
       <div className="flex flex-wrap mx-5">
@@ -59,7 +49,7 @@ const page = async ({ params: { slug } }) => {
           </div>
         </div>
         <div className="lg:w-[70%] w-full ">
-          <SearchBar data={data} />
+          <SearchBar />
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             {products.payload?.data.map((product, index) => {
               console.log(product);

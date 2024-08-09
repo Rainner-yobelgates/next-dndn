@@ -137,7 +137,7 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
                 <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                   {brands?.payload.map((brand, index) => {
                     return (
-                      <li key={index}><Link href="">{brand.name}</Link></li>
+                      <li key={index}><Link href={`/collections/brand-collections?brand=${brand.name}`}>{brand.name}</Link></li>
                     )
                   })}
                 </ul>
@@ -233,7 +233,7 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
               <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                 {brands?.payload.map((brand, index) => {
                     return (
-                      <li key={index}><Link href="">{brand.name}</Link></li>
+                      <li key={index}><Link href={`/collections/brand-collections?brand=${brand.name}`}>{brand.name}</Link></li>
                     )
                 })}
               </ul>
