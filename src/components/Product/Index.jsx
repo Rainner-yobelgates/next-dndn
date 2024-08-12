@@ -8,6 +8,8 @@ import formatCurrency from '@/utils/FormatCurrency';
 import Image from "next/image";
 
 const Product = ({api}) => {
+    console.log(api);
+    
     let settings = {
         dots: true,
         infinite: false,
@@ -50,7 +52,7 @@ const Product = ({api}) => {
       <Slider {...settings}>
         {api?.payload.map((product, index) => {
             return (
-                <Link href="" className="w-full p-4" key={index}>
+                <Link href={`/product/${product.slug}`} className="w-full p-4" key={index}>
                     <div className="card bg-base-100 shadow-lg">
                         <figure className="flex h-64"> {/* Set a fixed height for the figure */}
                             <Image

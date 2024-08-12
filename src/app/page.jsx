@@ -2,15 +2,16 @@ import Hero from "@/components/Hero/Index";
 import Testimoni from "@/components/Testimoni/Index";
 import Faq from "@/components/Faq/Index";
 import Product from "@/components/Product/Index";
-import Footer from "@/components/Footer/Index";
+import NewProducts from "@/components/NewProduct/Index";
 import Link from "next/link";
 import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 import { getData } from "@/libs/dndn-api";
 
 export default async function Home() {
-  const manCollection = await getData("collections/man", "limit=2")
-  const womanCollection = await getData("collections/woman", "limit=2")
-  const hero = await getData("banners", "limit=2")
+  const manCollection = await getData("collections/man")
+  const womanCollection = await getData("collections/woman")
+  const newProducts = await getData("collections/new-arrival-collections")
+  const hero = await getData("banners")
   
   // let recommendedAnime = await getNestedAnimeResponse("recommendations/anime", "entry")
   return (
@@ -23,10 +24,27 @@ export default async function Home() {
         <FaTiktok size={36} />
     </div>
    </section>
-   <section className="pt-14 lg:pt-18" id="testimoni">
+
+   <section className="pt-24 lg:pt-28">
     <div className="container mx-auto">
-      <h1 className="text-center font-bold text-2xl lg:text-4xl mb-10 uppercase">Testimoni</h1>
-      <Testimoni />
+      <h1 className="text-center font-bold text-2xl lg:text-4xl mb-10 uppercase">New Products</h1>
+      <p className="text-end mr-4 text-slate-500 font-semibold underline text-sm mb-2"><Link href="/collections/new-arrival-collections">View All</Link></p>
+      <NewProducts api={newProducts} />
+    </div>
+   </section>
+
+   <section className="pt-24 lg:pt-28">
+    <div className="container mx-auto">
+      <h1 className="text-center font-bold text-2xl lg:text-4xl mb-10 uppercase">Woman Collections</h1>
+      <p className="text-end mr-4 text-slate-500 font-semibold underline text-sm mb-2"><Link href="/collections/woman-collections">View All</Link></p>
+      <Product api={womanCollection} />
+    </div>
+   </section>
+   <section className="pt-24 lg:pt-28">
+    <div className="container mx-auto">
+      <h1 className="text-center font-bold text-2xl lg:text-4xl mb-10 uppercase">Man Collections</h1>
+      <p className="text-end mr-4 text-slate-500 font-semibold underline text-sm mb-2"><Link href="/collections/man-collections">View All</Link></p>
+      <Product api={manCollection} />
     </div>
    </section>
    <section className="pt-24 lg:pt-28" id="faq">
@@ -38,22 +56,11 @@ export default async function Home() {
       <Faq />
     </div>
    </section>
-   <section className="pt-24 lg:pt-28">
+   <section className="pt-14 lg:pt-18" id="testimoni">
     <div className="container mx-auto">
-      <h1 className="text-center font-bold text-2xl lg:text-4xl mb-10 uppercase">Woman Collections</h1>
-      <p className="text-end mr-4 text-slate-500 font-semibold underline text-sm"><Link href="/collections/woman-collections">View All</Link></p>
-      <Product api={womanCollection} />
+      <h1 className="text-center font-bold text-2xl lg:text-4xl mb-10 uppercase">Testimoni</h1>
+      <Testimoni />
     </div>
-   </section>
-   <section className="pt-24 lg:pt-28">
-    <div className="container mx-auto">
-      <h1 className="text-center font-bold text-2xl lg:text-4xl mb-10 uppercase">man Collections</h1>
-      <p className="text-end mr-4 text-slate-500 font-semibold underline text-sm"><Link href="/collections/man-collections">View All</Link></p>
-      <Product api={manCollection} />
-    </div>
-   </section>
-   <section className="pt-24 lg:pt-28">
-    <Footer />
    </section>
    </>
   );

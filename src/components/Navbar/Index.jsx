@@ -8,7 +8,7 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
   const [isOpen, setIsOpen] = useState(false);
   
   return (
-    <nav className="bg-gray-800">
+    <nav className="bg-[#fff4f4] border-b border-slate-300 ">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -55,21 +55,21 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
             </button>
           </div>
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-              <Link href="/" className="text-white font-bold py-2">
+              <Link href="/" className="font-bold py-2">
                 Navbar
               </Link>
             <div className="hidden sm:flex ml-auto space-x-4 items-center">
-              <Link href="/" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              <Link href="/" className="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                 Home
               </Link>
-              <Link href="/collections/new-arrival-collections" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              <Link href="/collections/new-arrival-collections" className="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                 New Products
               </Link>
-              <Link href="/#testimoni" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              <Link href="/#testimoni" className="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                 Testimoni
               </Link>
               <details className="dropdown">
-                <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0">
+                <summary className="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0">
                   Woman
                 </summary>
                 <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
@@ -100,7 +100,7 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
                 </ul>
               </details>
               <details className="dropdown">
-                <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0">
+                <summary className="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0">
                   Man
                 </summary>
                 <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
@@ -131,7 +131,7 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
                 </ul>
               </details>
               <details className="dropdown">
-                <summary className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0">
+                <summary className="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium btn-ghost h-[38px] min-h-0">
                   Brands
                 </summary>
                 <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
@@ -142,7 +142,7 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
                   })}
                 </ul>
               </details>
-              <Link href="/#faq" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              <Link href="/#faq" className="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                 Terms Condition & FAQ
               </Link>
             </div>

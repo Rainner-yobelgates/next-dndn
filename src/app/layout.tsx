@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import FetchNavbar from "@/utils/FetchNavbar";
+import Footer from "@/components/Footer/Index";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -21,6 +22,9 @@ export default function RootLayout({
       <body className={montserrat.className}>
         <FetchNavbar />
         {children}
+        <section className="pt-24 lg:pt-28">
+          <Footer />
+        </section>
         </body>
     </html>
   );
