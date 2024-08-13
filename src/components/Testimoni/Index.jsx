@@ -3,32 +3,44 @@ import React from 'react'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Image from 'next/image';
 
 let settings = {
     dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 3 > 4 ? 4 : 3,
+    infinite: true,
+    slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
     arrows: false,
+    swipeToSlide: false,
+    draggable: false,
+    autoplay: true,
+    speed: 1500,
+    autoplaySpeed: 1500,
     responsive: [
-    {
-        breakpoint: 1140,
-        settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-        infinite: true,
-        dots: true
+        {
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                dots: true
+            }
+        },
+        {
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                dots: true
+            }
+        },
+        {
+            breakpoint: 480,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
         }
-    },
-    {
-        breakpoint: 480,
-        settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-        }
-    }
     ]
 };
 
@@ -36,48 +48,20 @@ const Testimoni = () => {
   return (
     <div className="slider-container">
       <Slider {...settings}>
-            <div className="w-full p-4">
-                <div className="card bg-base-100 shadow-lg">
-                    <img 
-                    src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp"
-                    alt="Shoes" />
-                </div>
-            </div>
-            <div className="w-full p-4">
-                <div className="card bg-base-100 shadow-lg">
-                    <img 
-                    src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp"
-                    alt="Shoes" />
-                </div>
-            </div>
-            <div className="w-full p-4">
-                <div className="card bg-base-100 shadow-lg">
-                    <img 
-                    src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp"
-                    alt="Shoes" />
-                </div>
-            </div>
-            {/* <div className="w-full p-4">
-                <div className="card bg-base-100 shadow-lg">
-                    <img 
-                    src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp"
-                    alt="Shoes" />
-                </div>
-            </div>
-            <div className="w-full p-4">
-                <div className="card bg-base-100 shadow-lg">
-                    <img 
-                    src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp"
-                    alt="Shoes" />
-                </div>
-            </div>
-            <div className="w-full p-4">
-                <div className="card bg-base-100 shadow-lg">
-                    <img 
-                    src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp"
-                    alt="Shoes" />
-                </div>
-            </div> */}
+      {Array.from({ length: 10 }).map((_, index) => (
+        <div key={index} className="w-full p-4">
+          <div className="card bg-base-100 shadow-lg">
+          <Image
+            src={`/${index + 1}.png`} // Dynamic path to your image
+            alt="Testimoni"
+            layout="responsive"
+            width={500} // Set a default width
+            height={500} // Set a default height
+            className="object-cover w-full h-full" // Ensure the image covers the container
+            />
+          </div>
+        </div>
+      ))}
      </Slider>
     </div>
   )

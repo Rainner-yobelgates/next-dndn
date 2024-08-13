@@ -1,19 +1,44 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react'
 import SearchBar from '@/components/SearchBar/Index'
 import { getData } from '@/libs/dndn-api';
 import Link from 'next/link';
 import formatCurrency from '@/utils/FormatCurrency';
 import Image from 'next/image';
 
-const page = async ({ params, searchParams }) => {
+const page = ({ params, searchParams }) => {
+  const [page, setPage] = useState(1)
+  const [products, setProducts] = useState([])
   let url = `collections/${params.slug}`;
+  let query = "page=1" 
 
-  let query = "" 
-  if (Object.keys(searchParams).length > 0) {
-    const queryString = new URLSearchParams(searchParams).toString().toLowerCase();
-    query += `${queryString}`;
+  const fetchData = async () =>  {
+    if (Object.keys(searchParams).length > 0) {
+      const queryString = new URLSearchParams(searchParams).toString().toLowerCase();
+      query += `?${queryString}`;
+    }
+    const data = await getData(url, query);
+    setProducts(data)
   }
-  const products = await getData(url, query);
+
+  const handleNextPage = () => {
+    scrollTo({
+      behavior:"smooth",
+      top:0
+    })
+    setPage((prevState) => prevState + 1)
+  }
+  const handlePrevPage = () => {
+    scrollTo({
+      behavior:"smooth",
+      top:0
+    })
+    setPage((prevState) => prevState - 1)
+  }
+  useEffect(() => {
+    fetchData()
+  }, [page])
+  
   return (
     <div className="container mx-auto">
       <div className="flex flex-wrap mx-5">
@@ -79,6 +104,15 @@ const page = async ({ params, searchParams }) => {
           </div>
         </div>
       </div>
+        <div className="flex justify-center items-center py-4 px-2 gap-4 mt-5">
+            {page <= 1 ? null :
+              <button onClick={handlePrevPage} className="transition-all hover:text-slate-500">Prev</button>
+            }
+            <p>{page} of {products.payload?.last_page}</p>
+            {page >= products.payload?.last_page ? null :
+              <button onClick={handleNextPage} className="transition-all hover:text-slate-500">Next</button>
+            }
+        </div>
     </div>
   )
 }
