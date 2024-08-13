@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar/Index";
 import { getData } from "@/libs/dndn-api";
 
-const FetchNavbar = async () => {
+const FetchNavbar = async ({ fontClass }) => {
   const brands = await getData("brands")
   const ManBrands = await getData("brands-type/man")
   const WomanBrands = await getData("brands-type/woman")
@@ -9,7 +9,7 @@ const FetchNavbar = async () => {
   const WomanCategories = await getData("categories/woman")
   
   return (
-    <Navbar brands={brands} manBrands={ManBrands} womanBrands={WomanBrands} manCategories={ManCategories} womanCategories={WomanCategories} />
+    <Navbar brands={brands} manBrands={ManBrands} womanBrands={WomanBrands} manCategories={ManCategories} womanCategories={WomanCategories} fontClass={fontClass} />
   )
 }
 

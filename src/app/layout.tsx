@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Montserrat, Yeseva_One } from "next/font/google";
 import "./globals.css";
 import FetchNavbar from "@/utils/FetchNavbar";
 import Footer from "@/components/Footer/Index";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
+const yeseva = Yeseva_One({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,10 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <FetchNavbar />
+        <FetchNavbar fontClass={yeseva.className} />
         {children}
         <section className="pt-24 lg:pt-28">
-          <Footer />
+          <Footer fontClass={yeseva.className} />
         </section>
         </body>
     </html>
