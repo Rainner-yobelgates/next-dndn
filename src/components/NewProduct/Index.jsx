@@ -6,7 +6,7 @@ import Link from "next/link";
 const NewProduct = ({api}) => {
     
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-0 lg:gap-8">
         {api.payload.data.map((product, index) => {
             return (
                 <Link href={`/product/${product.slug}`} key={index} className="p-4 lg:p-0">

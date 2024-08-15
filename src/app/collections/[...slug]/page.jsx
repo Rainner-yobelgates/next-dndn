@@ -218,7 +218,7 @@ const page = ({ params, searchParams }) => {
         </div>
         <div className="lg:w-[75%] w-full ">
           <SearchBar />
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {products.payload?.data.map((product, index) => {
               return (
                 <Link href={''} key={product.id}>
