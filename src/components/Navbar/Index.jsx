@@ -25,7 +25,9 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
               </Link>
               <div className="hidden sm:flex ml-auto space-x-4 items-center">
                   <IoSearchOutline size={23} />
+                <Link href="/cart">
                   <IoCartOutline size={23} />
+                </Link>
               </div>
           </div>
         
