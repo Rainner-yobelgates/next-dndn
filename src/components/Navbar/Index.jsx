@@ -33,7 +33,7 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
           </div>
         
         <div className="relative flex items-center justify-between h-16 lg:h-10">
-          <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <div className="absolute inset-y-0 left-0 flex items-center lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
@@ -76,11 +76,12 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
               )}
             </button>
           </div>
-          <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+          <div className="flex-1 flex items-center justify-center lg:items-stretch lg:justify-start ml-16 lg:ml-0">
               <Link href="/" className={`lg:hidden font-bold text-xl py-2 ${fontClass}`}>
                 DNDN
               </Link>
-            <div className="hidden sm:flex mx-auto space-x-4 items-center">
+              
+            <div className="hidden lg:flex mx-auto space-x-4 items-center">
               <Link href="/" className="hover:text-slate-400 px-3 py-2 text-sm font-medium">
                 Home
               </Link>
@@ -332,6 +333,12 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
                 Terms Condition & FAQ
               </Link>
             </div>
+          </div>
+          <div className="lg:hidden flex space-x-4 items-center">
+            <IoSearchOutline size={23} />
+            <Link href="/cart">
+              <IoCartOutline size={23} />
+            </Link>
           </div>
         </div>
       </div>
