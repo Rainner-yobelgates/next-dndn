@@ -2,11 +2,13 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { IoCartOutline, IoSearchOutline } from 'react-icons/io5';
-import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa';
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import SearchBar from '../SearchBar/Index';
 
 export default function Navbar({brands, manBrands, womanBrands, manCategories, womanCategories, fontClass}) {
   
   const [isOpen, setIsOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [isFirstMainMenuOpen, setFirstMainMenuOpen] = useState(false);
   const [isSecondMainMenuOpen, setSecondMainMenuOpen] = useState(false);
   const [openSubMenu, setOpenSubMenu] = useState({ first: null, second: null });
@@ -25,9 +27,9 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
                 DNDN
               </Link>
               <div className="hidden sm:flex ml-auto space-x-4 items-center">
-                  <IoSearchOutline size={23} />
+                  <IoSearchOutline className="pointer hover:text-slate-400" onClick={() => setSearchOpen(!searchOpen)} size={23} />
                 <Link href="/cart">
-                  <IoCartOutline size={23} />
+                  <IoCartOutline size={23} className="pointer hover:text-slate-400" />
                 </Link>
               </div>
           </div>
@@ -335,15 +337,15 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
             </div>
           </div>
           <div className="lg:hidden flex space-x-4 items-center">
-            <IoSearchOutline size={23} />
+            <IoSearchOutline className="pointer hover:text-slate-400" onClick={() => setSearchOpen(!searchOpen)} size={23} />
             <Link href="/cart">
-              <IoCartOutline size={23} />
+              <IoCartOutline size={23} className="pointer hover:text-slate-400" />
             </Link>
           </div>
         </div>
       </div>
 
-      <div className={`${isOpen ? 'block' : 'hidden'} sm:hidden transition-all`} id="mobile-menu">
+      <div className={`${isOpen ? 'block' : 'hidden'} block lg:hidden transition-all`} id="mobile-menu">
         <div className="fixed top-0 left-0 w-1/2 h-full bg-white shadow-lg z-50 p-4">
           <div className="flex justify-end">
             <button
@@ -615,18 +617,20 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
                   </div>
                 </div>
               </div>
-
               <Link href="/#faq" className="hover:text-slate-400 px-3 py-4 text-sm font-medium">
                 Terms Condition & FAQ
               </Link>
               <hr />
               <div className="flex justify-center pt-4 gap-5">
-                  <FaFacebook size={20} color="#1877F2" />
-                  <FaInstagram size={20} color="#E1306C"/>
-                  <FaTiktok size={20} />
+              <Link href={""}><FaWhatsapp size={25} color="#25D366" /></Link>
+              <Link href={""}><FaInstagram size={25} color="#E1306C"/></Link>
               </div>
           </div>
         </div>
+      </div>
+
+      <div className={`${searchOpen ? 'block' : 'hidden'} transition-all`} id="mobile-menu">
+        <SearchBar setSearchOpen={setSearchOpen} />
       </div>
     </nav>
   );

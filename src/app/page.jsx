@@ -4,7 +4,7 @@ import Faq from "@/components/Faq/Index";
 import Product from "@/components/Product/Index";
 import NewProducts from "@/components/NewProduct/Index";
 import Link from "next/link";
-import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
+import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { getData } from "@/libs/dndn-api";
 
 export default async function Home() {
@@ -19,9 +19,8 @@ export default async function Home() {
    <section>
     <Hero api={hero} />
     <div className="flex justify-center pt-14 gap-5">
-        <FaFacebook size={36} color="#1877F2" />
-        <FaInstagram size={36} color="#E1306C"/>
-        <FaTiktok size={36} />
+    <Link href={""}><FaWhatsapp size={36} color="#25D366" /></Link>
+    <Link href={""}><FaInstagram size={36} color="#E1306C"/></Link>
     </div>
    </section>
 

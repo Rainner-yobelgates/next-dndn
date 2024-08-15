@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa'
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa'
 
 const Footer = ({ fontClass }) => {
   return (
@@ -26,9 +26,8 @@ const Footer = ({ fontClass }) => {
             <h6 className="footer-title">Contact Us</h6>
             <p className="w-80 link link-hover">Stay connected with us through our Contact Us page for any inquiries or further support</p>
             <div className="flex justify-center gap-5 pt-3">
-                <FaFacebook size={25} color="#1877F2" />
-                <FaInstagram size={25} color="#E1306C"/>
-                <FaTiktok size={25} />
+            <Link href={""}><FaWhatsapp size={36} color="#25D366" /></Link>
+            <Link href={""}><FaInstagram size={36} color="#E1306C"/></Link>
             </div>
         </nav>
     </footer>
