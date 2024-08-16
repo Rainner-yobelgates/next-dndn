@@ -36,7 +36,7 @@ export const CartProvider = ({children}) => {
 
             newCartItems = cart.cartItems.map((i) =>
                 i.slug === isItemExist.slug
-                    ? { ...i, quantity: newQuantity }
+                    ? { name:item.name, slug:item.slug, price:item.price, stock:item.stock, brand:item.brand, image:item.image ,quantity: newQuantity }
                     : i
             );
         }else{

@@ -5,7 +5,7 @@ import CartContext from '@/context/CartContext';
 import formatCurrency from '@/utils/FormatCurrency';
 
 const page = () => {
-  const currentUrl = `${window.location.origin}`;
+  const currentUrl = typeof window !== 'undefined' ? window.location.origin : '';
   const [message, setMessage] = useState('');
   const { cart } = useContext(CartContext);
   const [totalPrice, setTotalPrice] = useState(0);

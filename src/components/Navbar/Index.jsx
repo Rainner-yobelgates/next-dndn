@@ -589,7 +589,7 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
                   className="inline-flex w-full px-3 py-4 text-sm font-medium hover:text-slate-400"
                   aria-haspopup="true"
                   aria-expanded="false"
-                  href={"/collections"}
+                  href={"/collections/new-arrival-collections"}
                 >
                   Brands
                   <svg

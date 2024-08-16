@@ -9,6 +9,7 @@ import { FaRegTrashAlt } from 'react-icons/fa'
 
 const CartItem = () => {
     const { addItemToCart, cart, deleteItemCart } = useContext(CartContext);
+    console.log(cart);
     
     //Ketika quantity sama maka akan ditambah 1
     const increaeseQty = (item) => {

@@ -9,7 +9,7 @@ import CartContext from '@/context/CartContext'
 const DetailProduct = ({ product, newArrival }) => {
     const  [quantity, setQuantity] = useState(1)
     const { addItemToCart } = useContext(CartContext);
-    const currentUrl = `${window.location.origin}`;
+    const currentUrl = typeof window !== 'undefined' ? window.location.origin : '';
     
     const addToCartHandler = () => {
         addItemToCart({
@@ -22,7 +22,7 @@ const DetailProduct = ({ product, newArrival }) => {
             quantity: quantity
         })
     }
-
+   
     return (
         <div className="container mx-auto">
             <div className="flex flex-wrap mb-16">

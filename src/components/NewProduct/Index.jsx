@@ -7,7 +7,7 @@ const NewProduct = ({api}) => {
     
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-0 lg:gap-8">
-        {api.payload.data.map((product, index) => {
+        {api.payload?.data.map((product, index) => {
             return (
                 <Link href={`/product/${product.slug}`} key={index} className="p-4 lg:p-0">
                     <div className="card bg-base-100 shadow-xl">

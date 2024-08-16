@@ -1,3 +1,4 @@
+"use client"
 import Hero from "@/components/Hero/Index";
 import Testimoni from "@/components/Testimoni/Index";
 import Faq from "@/components/Faq/Index";
@@ -6,14 +7,47 @@ import NewProducts from "@/components/NewProduct/Index";
 import Link from "next/link";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { getData } from "@/libs/dndn-api";
+import { useEffect, useState } from "react";
 
-export default async function Home() {
-  const manCollection = await getData("collections/man")
-  const womanCollection = await getData("collections/woman")
-  const newProducts = await getData("collections/new-arrival-collections")
-  const hero = await getData("banners")
+export default function Home() {
+  const [loading, setLoading] = useState(true);
+  const [manCollection, setManCollection] = useState([]);
+  const [womanCollection, setWomanCollection] = useState([]);
+  const [newProducts, setNewProducts] = useState([]);
+  const [hero, setHero] = useState([]);
+
+  useEffect(() => {
+    // Fungsi untuk fetch data
+    async function fetchData() {
+      setLoading(true)
+      try {
+        const fetchManCollection = await getData("collections/man");
+        const fetchWomanCollection = await getData("collections/woman");
+        const fetchNewProducts = await getData("collections/new-arrival-collections");
+        const fetchHero = await getData("banners");
   
-  // let recommendedAnime = await getNestedAnimeResponse("recommendations/anime", "entry")
+        // Set state dengan data yang di-fetch
+        setManCollection(fetchManCollection);
+        setWomanCollection(fetchWomanCollection);
+        setNewProducts(fetchNewProducts);
+        setHero(fetchHero);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false); // Selesai loading
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+    <div className="fixed inset-0 bg-white bg-opacity-100 flex items-center justify-center z-50">
+      <span className="loading loading-spinner loading-lg"></span>
+    </div>
+    ) // Tampilkan loader saat data sedang di-fetch
+  }
   return (
    <>
    <section>

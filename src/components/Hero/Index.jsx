@@ -4,7 +4,7 @@ import React from 'react'
 const Hero = ({api}) => {
   return (
     <div className="carousel w-full">
-        {api?.payload.map((banner, index) => {
+        {api.payload?.map((banner, index) => {
             return (
                 <div id={`slide${index + 1}`} className="carousel-item relative w-full" key={index}>
                     <Image

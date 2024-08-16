@@ -1,12 +1,12 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import SearchBar from '@/components/SearchBar/Index'
 import { getData } from '@/libs/dndn-api';
 import Link from 'next/link';
 import formatCurrency from '@/utils/FormatCurrency';
 import Image from 'next/image';
 
 const page = ({ params, searchParams }) => {
+  const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(1)
   const [products, setProducts] = useState([])
   let url = `collections/${params.slug}`;
@@ -84,35 +84,43 @@ const page = ({ params, searchParams }) => {
   };
 
   const fetchData = async () => {
-    // Inisialisasi URLSearchParams untuk parameter query
-    const query = new URLSearchParams();
-  
-    // Tambahkan parameter dari selectedFilters
-    Object.keys(selectedFilters).forEach((key) => {
-      
-      if (selectedFilters[key].length > 0) {
-        const values = selectedFilters[key].map(value => value.split(' ')[0].toLowerCase()).join(',');
-        query.append(key, values);
+    setLoading(true)
+    try {
+      // Inisialisasi URLSearchParams untuk parameter query
+      const query = new URLSearchParams();
+    
+      // Tambahkan parameter dari selectedFilters
+      Object.keys(selectedFilters).forEach((key) => {
+        
+        if (selectedFilters[key].length > 0) {
+          const values = selectedFilters[key].map(value => value.split(' ')[0].toLowerCase()).join(',');
+          query.append(key, values);
+        }
+      });
+    
+      // Tambahkan parameter dari searchParams jika ada
+      if (Object.keys(searchParams).length > 0) {
+        const searchParamsString = new URLSearchParams(searchParams).toString().toLowerCase();
+        const searchParamsEntries = new URLSearchParams(searchParamsString).entries();
+        
+        // Tambahkan parameter satu per satu
+        for (const [key, value] of searchParamsEntries) {
+          query.append(key, value);
+        }
       }
-    });
-  
-    // Tambahkan parameter dari searchParams jika ada
-    if (Object.keys(searchParams).length > 0) {
-      const searchParamsString = new URLSearchParams(searchParams).toString().toLowerCase();
-      const searchParamsEntries = new URLSearchParams(searchParamsString).entries();
-      
-      // Tambahkan parameter satu per satu
-      for (const [key, value] of searchParamsEntries) {
-        query.append(key, value);
-      }
+    
+      // Konversi ke string query
+      const queryString = query.toString();
+    
+      // Lakukan fetch data dengan URL yang digabungkan
+      const data = await getData(url, queryString);
+      setProducts(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false); // Selesai loading
     }
-  
-    // Konversi ke string query
-    const queryString = query.toString();
-  
-    // Lakukan fetch data dengan URL yang digabungkan
-    const data = await getData(url, queryString);
-    setProducts(data);
+    
   };
 
   useEffect(() => {
@@ -125,6 +133,13 @@ const page = ({ params, searchParams }) => {
       to_price: '',
     });
   };
+  if (loading) {
+    return (
+    <div className="fixed inset-0 bg-white bg-opacity-100 flex items-center justify-center z-50">
+      <span className="loading loading-spinner loading-lg"></span>
+    </div>
+    ) // Tampilkan loader saat data sedang di-fetch
+  }
   return (
     <div className="container mx-auto">
       <div className="flex flex-wrap mx-5">
@@ -218,6 +233,8 @@ const page = ({ params, searchParams }) => {
         <div className="lg:w-[75%] w-full ">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
             {products.payload?.data.map((product, index) => {
+              console.log(product.images, product.name);
+              
               return (
                 <Link href={`/product/${product.slug}`} key={product.id}>
                   <div className="card bg-base-100 w-full shadow-xl">

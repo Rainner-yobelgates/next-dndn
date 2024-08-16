@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 const ProductImage = ({images}) => {
-    const [thumbnail, setThumbnail] = useState(`https://api.al-miffa.or.id/storage/${images[0].path}`);
+  const [thumbnail, setThumbnail] = useState(`https://api.al-miffa.or.id/storage/${images[0].path}`);
   return (
     <>
         <Image 
