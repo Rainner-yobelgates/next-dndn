@@ -109,7 +109,6 @@ const page = ({ params, searchParams }) => {
   
     // Konversi ke string query
     const queryString = query.toString();
-    console.log(selectedFilters, queryString);
   
     // Lakukan fetch data dengan URL yang digabungkan
     const data = await getData(url, queryString);
@@ -217,13 +216,12 @@ const page = ({ params, searchParams }) => {
           </div>
         </div>
         <div className="lg:w-[75%] w-full ">
-          <SearchBar />
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
             {products.payload?.data.map((product, index) => {
               return (
-                <Link href={''} key={product.id}>
+                <Link href={`/product/${product.slug}`} key={product.id}>
                   <div className="card bg-base-100 w-full shadow-xl">
-                    <figure className="flex h-64">
+                    <figure className="flex h-56">
                         <Image
                           src={`https://api.al-miffa.or.id/storage/${product.images[0].path}`} // Dynamic path to your image
                           alt="Shoes"

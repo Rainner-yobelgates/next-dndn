@@ -4,7 +4,6 @@ export const getData = async(resource, query) => {
             "Content-Type": "application/json"
         }
     });
-    console.log(`${process.env.NEXT_PUBLIC_API_BASE_URL}/${resource}?${query}`);
     const data = await response.json()
     return data
 }

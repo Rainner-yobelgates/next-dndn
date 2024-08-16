@@ -1,7 +1,27 @@
-import React from 'react'
-import CartItem from '@/components/Cartitem/index'
+"use client"
+import React, { useContext, useEffect, useState } from 'react'
+import CartItem from '@/components/CartItem'
+import CartContext from '@/context/CartContext';
+import formatCurrency from '@/utils/FormatCurrency';
 
 const page = () => {
+  const { cart } = useContext(CartContext);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const calculateTotalPrice = (items) => {
+      return items.reduce((total, item) => {
+          const price = parseFloat(item.price);
+          const quantity = item.quantity; 
+          return total + (price * quantity); 
+      }, 0);
+  };
+
+  useEffect(() => {
+      if (cart?.cartItems) {
+          const calculatedTotal = calculateTotalPrice(cart.cartItems);
+          setTotalPrice(calculatedTotal);
+      }
+  }, [cart?.cartItems]);
+
   return (
     <div className="container mx-auto">
         <h1 className="text-center font-bold text-xl my-10 text-slate-600">Your Cart</h1>
@@ -12,17 +32,18 @@ const page = () => {
             </div>
             <div className="flex-1 mx-5">
                 <h3 className="text-lg font-bold">Summary</h3>
-                <div className="p-5 my-5 bg-slate-200 rounded-xl">
+                <div className="p-10 my-5 bg-[#fff4f4] rounded-xl border">
                   <div className="flex justify-between">
-                    <h2 className="uppercase text-md lg:text-lg font-medium text-black">Subtotal</h2>
-                    <h2 className="text-md lg:text-lg font-medium text-black">IDR 100.000</h2>
+                    <h2 className="uppercase text-md font-medium">Subtotal</h2>
+                    <h2 className="text-md font-medium">IDR {formatCurrency(totalPrice)}</h2>
                   </div>
-                    <p className="text-sm lg:text-lg py-5 border-t mt-5">
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora dignissimos explicabo mollitia, qui velit asperiores sunt sint, rerum perspiciatis atque nesciunt at unde minima dolor obcaecati magni, itaque commodi ab repellat cumque neque quam ad odit! Ratione est nobis explicabo exercitationem facilis amet sapiente suscipit ad placeat corrupti! Quo, nulla.
+                  <hr className="my-5" />
+                    <p className="text-sm">
+                    Berikut adalah detail lengkap pesanan Anda. Harap pastikan semua informasi sudah benar sebelum melanjutkan ke pembayaran. Periksa item, jumlah, dan total biaya dengan cermat. Jika sudah sesuai, silakan lanjutkan untuk menyelesaikan pembelian Anda.
                     </p>
                 </div>
                 <div className="flex justify-center">
-                  <button className="btn btn-wide uppercase bg-slate-700 text-white hover:text-black">Checkout</button>
+                  <button className="btn btn-wide uppercase bg-[#302e2e] text-white hover:text-[#302e2e] hover:bg-[#fff4f4]">Checkout</button>
                 </div>
             </div>
         </div>

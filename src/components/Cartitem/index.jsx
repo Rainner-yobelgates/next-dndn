@@ -1,80 +1,76 @@
+"use client"
+import CartContext from '@/context/CartContext';
+import formatCurrency from '@/utils/FormatCurrency';
 import Image from 'next/image'
-import React from 'react'
+import Link from 'next/link';
+import React, { useContext } from 'react'
+import { CiSquareMinus, CiSquarePlus } from 'react-icons/ci';
 import { FaRegTrashAlt } from 'react-icons/fa'
 
 const CartItem = () => {
+    const { addItemToCart, cart, deleteItemCart } = useContext(CartContext);
+    
+    //Ketika quantity sama maka akan ditambah 1
+    const increaeseQty = (item) => {
+        addItemToCart(item)
+    }
+    //Ketika quantity kurang dari 1 maka akan dikurang 1
+    const decreaeseQty = (item) => {
+        if (item.quantity > 1) {
+            const cartItem = {...item, quantity:item.quantity - 1}
+            addItemToCart(cartItem)  
+        }
+    }
+    
   return (
     <>
-        <div className="flex py-5 gap-3 md:gap-5 border-b">
-            <div className="shrink-0 aspect-square w-12 md:w-32">
-            <Image 
-                src={"https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"} 
-                style={{ aspectRatio: '1 / 1' }} 
-                alt="Shoes" 
-                className="w-full h-auto object-cover" 
-                width={500}
-                height={500}
-                />
-            </div>
-            <div className="w-full">
-                <div className="flex flex-col lg:flex-row justify-between">
-                    <p className="text-lg lg:text-2xl font-semibold text-slate-800">
-                        Jordan Retro 6 G
-                    </p>
-                    <p className="text-sm lg:text-md font-medium text-slate-600 block lg:hidden">
-                        Mens shoes
-                    </p>
-                    <p className="text-sm lg:text-md font-bold text-slate-600 mt-2">
-                        IDR 100.000
-                    </p>
+    {cart.cartItems?.map((item, index) => {
+        return (
+            <div className="flex py-5 gap-3 md:gap-5 border-b" key={index}>
+                <div className="shrink-0 aspect-square w-32">
+                <Image 
+                    src={`https://api.al-miffa.or.id/storage/${item.image}`} 
+                    style={{ aspectRatio: '1 / 1' }} 
+                    alt="Shoes" 
+                    className="w-full h-auto object-cover" 
+                    width={500}
+                    height={500}
+                    />
                 </div>
-                <p className="text-sm lg:text-md font-medium text-slate-600 hidden lg:block">
-                    Mens shoes
-                </p>
-                <div className="flex mt-4 items-center justify-between">
-                    <div className="flex text-sm lg:text-md text-slate-600 gap-2">
-                        <p className="font-semibold">Quantity :</p>
-                        <input type="number"  className="w-14 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="1" min="1" />
+                <div className="w-full">
+                    <div className="flex flex-col lg:flex-row justify-between">
+                        <p className="text-lg lg:text-2xl font-semibold text-slate-800">
+                            {item.name}
+                        </p>
+                        <p className="text-sm lg:text-md font-medium text-slate-600 block lg:hidden">
+                            {item.brand}
+                        </p>
+                        <p className="text-sm lg:text-md font-bold text-slate-600 mt-2">
+                            IDR {formatCurrency(item.price)}
+                        </p>
                     </div>
-                    <FaRegTrashAlt size={20} className="text-slate-600 hover:text-red-600 hover:cursor-pointer transition" />
-                </div>
-            </div>
-        </div>
-        <div className="flex py-5 gap-3 md:gap-5 border-b">
-            <div className="shrink-0 aspect-square w-12 md:w-32">
-            <Image 
-                src={"https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"} 
-                style={{ aspectRatio: '1 / 1' }} 
-                alt="Shoes" 
-                className="w-full h-auto object-cover" 
-                width={500}
-                height={500}
-                />
-            </div>
-            <div className="w-full">
-                <div className="flex flex-col lg:flex-row justify-between">
-                    <p className="text-lg lg:text-2xl font-semibold text-slate-800">
-                        Jordan Retro 6 G
+                    <p className="text-sm lg:text-md font-medium text-slate-600 hidden lg:block">
+                        {item.brand}
                     </p>
-                    <p className="text-sm lg:text-md font-medium text-slate-600 block lg:hidden">
-                        Mens shoes
-                    </p>
-                    <p className="text-sm lg:text-md font-bold text-slate-600 mt-2">
-                        IDR 100.000
-                    </p>
-                </div>
-                <p className="text-sm lg:text-md font-medium text-slate-600 hidden lg:block">
-                    Mens shoes
-                </p>
-                <div className="flex mt-4 items-center justify-between">
-                    <div className="flex text-sm lg:text-md text-slate-600 gap-2">
-                        <p className="font-semibold">Quantity :</p>
-                        <input type="number"  className="w-14 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="1" min="1" />
+                    <div className="flex mt-4 items-center justify-between">
+                        <div className="flex text-sm lg:text-md text-slate-600 gap-2">
+                            <p className="font-semibold">Quantity :</p>
+                            <div className="flex items-center">
+                                <button onClick={() => decreaeseQty(item)}><CiSquareMinus size={25} /></button>
+                                <p className="font-bold mx-2">{item.quantity}</p>
+                                <button onClick={() => increaeseQty(item)}><CiSquarePlus size={25} /></button>
+                            <p className="mx-2 font-semibold text-slate-500">/ {item.stock}</p>
+                            </div>
+                        </div>
+                        <button onClick={() => deleteItemCart(item.slug)}><FaRegTrashAlt size={20} className="text-slate-600 hover:text-red-600 hover:cursor-pointer transition" /></button>
                     </div>
-                    <FaRegTrashAlt size={20} className="text-slate-600 hover:text-red-600 hover:cursor-pointer transition" />
                 </div>
             </div>
-        </div>
+        )
+    })}
+    {cart.cartItems?.length === 0 && (
+            <p className="p-2 text-gray-500 text-center font-semibold">Your basket is empty, <Link className="underline" href="/collections/new-arrival-collections">Continue shopping</Link></p>
+          )}
     </>
   )
 }

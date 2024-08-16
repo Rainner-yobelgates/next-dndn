@@ -54,7 +54,6 @@ const Testimoni = () => {
           <Image
             src={`/${index + 1}.png`} // Dynamic path to your image
             alt="Testimoni"
-            layout="responsive"
             width={500} // Set a default width
             height={500} // Set a default height
             className="object-cover w-full h-full" // Ensure the image covers the container

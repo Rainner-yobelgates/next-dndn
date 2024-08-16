@@ -120,9 +120,9 @@ const SearchBar = ({setSearchOpen}) => {
               ))}
             </div>
           )}
-          {filteredResults?.products &&
-          filteredResults?.womanCollections &&
-          filteredResults?.manCollections && (
+          {!filteredResults?.products &&
+          !filteredResults?.womanCollections &&
+          !filteredResults?.manCollections && (
             <div className="p-2 text-gray-500">No results found</div>
           )}
         </div>

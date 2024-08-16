@@ -8,7 +8,6 @@ import formatCurrency from '@/utils/FormatCurrency';
 import Image from "next/image";
 
 const Product = ({api}) => {
-    console.log(api);
     
     let settings = {
         dots: true,
