@@ -622,8 +622,8 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
               </Link>
               <hr />
               <div className="flex justify-center pt-4 gap-5">
-              <Link href={""}><FaWhatsapp size={25} color="#25D366" /></Link>
-              <Link href={""}><FaInstagram size={25} color="#E1306C"/></Link>
+              <Link href={"https://api.whatsapp.com/send?phone=6281617171488&"} target="_blank"><FaWhatsapp size={25} color="#25D366" /></Link>
+            <Link href={"https://www.instagram.com/dndn.luxury/"} target="_blank"><FaInstagram size={25} color="#E1306C"/></Link>
               </div>
           </div>
         </div>

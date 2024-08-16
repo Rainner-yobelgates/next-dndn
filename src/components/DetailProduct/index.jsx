@@ -9,6 +9,8 @@ import CartContext from '@/context/CartContext'
 const DetailProduct = ({ product, newArrival }) => {
     const  [quantity, setQuantity] = useState(1)
     const { addItemToCart } = useContext(CartContext);
+    const currentUrl = `${window.location.origin}`;
+    
     const addToCartHandler = () => {
         addItemToCart({
             name: product.payload.name,
@@ -35,7 +37,7 @@ const DetailProduct = ({ product, newArrival }) => {
                     <label className="block text-sm font-medium text-slate-500 mb-2">Quantity</label>
                     <input type="number" className="w-40 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-10" placeholder="1" min="1" max={product.payload.stock} onChange={(e) => setQuantity( parseInt(e.target.value, 10))} />
                     <div className="lg:flex lg:gap-4">
-                        <button className="btn btn-wide uppercase bg-green-600 text-white hover:bg-slate-700 mb-2">Shop By whatsapp</button>
+                        <Link target="_blank" href={`https://api.whatsapp.com/send?phone=6281617171488&text=Hai%20Min%2C%20Aku%20tertarik%20dengan%20${product.payload.name}.%20Apakah%20bisa%20dibantu%3F%20${currentUrl}/product/${product.payload.slug}`} className="btn btn-wide uppercase bg-green-600 text-white hover:bg-slate-700 mb-2">Shop By whatsapp</Link>
                         <button onClick={addToCartHandler} className="btn btn-wide uppercase">Add to cart</button>
                     </div>
                     <hr className="my-10" />

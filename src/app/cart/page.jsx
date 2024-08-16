@@ -5,6 +5,8 @@ import CartContext from '@/context/CartContext';
 import formatCurrency from '@/utils/FormatCurrency';
 
 const page = () => {
+  const currentUrl = `${window.location.origin}`;
+  const [message, setMessage] = useState('');
   const { cart } = useContext(CartContext);
   const [totalPrice, setTotalPrice] = useState(0);
   const calculateTotalPrice = (items) => {
@@ -19,9 +21,26 @@ const page = () => {
       if (cart?.cartItems) {
           const calculatedTotal = calculateTotalPrice(cart.cartItems);
           setTotalPrice(calculatedTotal);
+
+          const productLines = cart?.cartItems.map((product, index) => (
+            `${index + 1}. Name: ${product.name}\n` +
+            `   Price: ${formatCurrency(product.price)}\n` +
+            `   Brand: ${product.brand}\n` +
+            `   Link: ${currentUrl}/product/${product.slug}`
+          )).join('\n\n');
+      
+          const messageText = `Halo, saya ingin menanyakan ketersediaan produk berikut:\n\n--- Produk dipesan ---\n\n${productLines}\n\n--- Tagihan Saya ---\n\n- Subtotal: ${formatCurrency(calculatedTotal)}\n\nJika produk yang disebutkan tersedia, saya berminat untuk melanjutkan pemesanan. Terima kasih.`;
+      
+          setMessage(messageText);
       }
   }, [cart?.cartItems]);
-
+  
+  const handleClick = () => {
+    // Replace 'nomor_telepon' with the actual phone number
+    const phoneNumber = 'nomor_telepon'; // e.g., '1234567890'
+    const url = `https://api.whatsapp.com/send?phone=6285776594448&text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
   return (
     <div className="container mx-auto">
         <h1 className="text-center font-bold text-xl my-10 text-slate-600">Your Cart</h1>
@@ -43,7 +62,7 @@ const page = () => {
                     </p>
                 </div>
                 <div className="flex justify-center">
-                  <button className="btn btn-wide uppercase bg-[#302e2e] text-white hover:text-[#302e2e] hover:bg-[#fff4f4]">Checkout</button>
+                  <button onClick={handleClick} className="btn btn-wide uppercase bg-[#302e2e] text-white hover:text-[#302e2e] hover:bg-[#fff4f4]">Checkout</button>
                 </div>
             </div>
         </div>

@@ -19,8 +19,8 @@ export default async function Home() {
    <section>
     <Hero api={hero} />
     <div className="flex justify-center pt-14 gap-5">
-    <Link href={""}><FaWhatsapp size={36} color="#25D366" /></Link>
-    <Link href={""}><FaInstagram size={36} color="#E1306C"/></Link>
+    <Link href={"https://api.whatsapp.com/send?phone=6281617171488&"} target="_blank"><FaWhatsapp size={36} color="#25D366" /></Link>
+            <Link href={"https://www.instagram.com/dndn.luxury/"} target="_blank"><FaInstagram size={36} color="#E1306C"/></Link>
     </div>
    </section>
 

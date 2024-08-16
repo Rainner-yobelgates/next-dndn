@@ -26,8 +26,8 @@ const Footer = ({ fontClass }) => {
             <h6 className="footer-title">Contact Us</h6>
             <p className="w-80 link link-hover">Stay connected with us through our Contact Us page for any inquiries or further support</p>
             <div className="flex justify-center gap-5 pt-3">
-            <Link href={""}><FaWhatsapp size={36} color="#25D366" /></Link>
-            <Link href={""}><FaInstagram size={36} color="#E1306C"/></Link>
+            <Link href={"https://api.whatsapp.com/send?phone=6281617171488&"} target="_blank"><FaWhatsapp size={36} color="#25D366" /></Link>
+            <Link href={"https://www.instagram.com/dndn.luxury/"} target="_blank"><FaInstagram size={36} color="#E1306C"/></Link>
             </div>
         </nav>
     </footer>
