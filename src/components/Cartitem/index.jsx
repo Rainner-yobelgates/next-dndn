@@ -47,7 +47,7 @@ const CartItem = () => {
                         </p>
                         <div className="flex lg:hidden">
                             {Object.entries(item.variant).map(([key, value]) => (
-                                <p className="text-sm lg:text-md font-medium text-slate-600 block lg:hidden mr-2">
+                                <p key={key} className="text-sm lg:text-md font-medium text-slate-600 block lg:hidden mr-2">
                                 {key} : <b>{value}</b>
                                 </p>
                             ))}
@@ -60,7 +60,7 @@ const CartItem = () => {
                         {item.brand}
                     </p>
                     {Object.entries(item.variant).map(([key, value]) => (
-                        <p className="text-sm lg:text-md font-medium text-slate-600 hidden lg:block">
+                        <p key={key} className="text-sm lg:text-md font-medium text-slate-600 hidden lg:block">
                             {key} : <b>{value}</b>
                         </p>
                     ))}

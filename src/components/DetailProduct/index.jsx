@@ -59,7 +59,7 @@ const DetailProduct = ({ product, newArrival }) => {
         setVariantStock(matchingItems[0]?.stock ?? null);
         setQuantity(1)
         
-    }, [selectedVariants])
+    }, [selectedVariants, product.payload.attributes, product.payload.variants])
     
     return (
         <div className="container mx-auto">

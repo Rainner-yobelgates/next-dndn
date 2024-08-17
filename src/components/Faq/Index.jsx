@@ -11,7 +11,7 @@ const Faq = () => {
               Yes, items yang kami jual di produksi dari berbagai negara yang berbeda. 
               <br /> Karena DNDN Luxury merupakan direct importer since 2019,
               jadi kami berani claim bahwa items yang kami jual adalah Original Factory Outlet. <br /><br />
-              And don't worry, meskipun sisa pabrik, bukan berarti kami sembarangan kirim. <br /> 
+              And dont worry, meskipun sisa pabrik, bukan berarti kami sembarangan kirim. <br /> 
               Ada cacat, kami tukarkan terlebih dahulu supaya barang yg kamu terima dalam keadaan bagus & layak pakai. <br /> 
               Kami juga mensortir barang yang kita ambil dari Factory Outlet, pasti diberikan yang paling terbaik untuk customer. <br /> <br />
                 <b>NOTES : Barang yang defectnya terlalu parah tidak akan kami jual.</b>
@@ -61,9 +61,9 @@ const Faq = () => {
               Produk FO tidak lolos QC untuk
               masuk ke retail store. Sehingga produk DNDN tidak bisa dibandingkan langsung head to head dengan barang di retail store
               <br /><br />
-              <b>All sales are final ya</b> 😊
+              <b>All sales are final ya</b> 
               Target market DNDN adalah buyer yang memang mencari harga tas branded original yang lebih terjangkau.
-              And DNDN Luxury is PERFECT online shop for you to shopping the original branded items ❤️
+              And DNDN Luxury is PERFECT online shop for you to shopping the original branded items 
             </p>
         </div>
       </div>
@@ -89,7 +89,7 @@ const Faq = () => {
         <div className="collapse-content text-sm lg:text-md">
         <ul className="list-disc list-inside mt-2">
           <li>Barang yang sudah dipesan tidak bisa dibatalkan dengan alasan apapun.</li>
-          <li>Membeli artinya setuju dengan penjelasan yang kami berikan di highlight "FAQ FO".</li>
+          <li>Membeli artinya setuju dengan penjelasan yang kami berikan di highlight &quotFAQ FO&quot.</li>
           <li>Barang yang bisa diretur adalah barang reject yang sangat parah.</li>
           <li>Wajib memberikan video dengan jelas.</li>
           <li>Hanya menerima keluhan maksimal 1x24 jam setelah barang diterima.</li>

@@ -83,49 +83,48 @@ const Page = ({ params, searchParams }) => {
     }));
   };
 
-  const fetchData = async () => {
-    setLoading(true)
-    try {
-      // Inisialisasi URLSearchParams untuk parameter query
-      const query = new URLSearchParams();
-    
-      // Tambahkan parameter dari selectedFilters
-      Object.keys(selectedFilters).forEach((key) => {
-        
-        if (selectedFilters[key].length > 0) {
-          const values = selectedFilters[key].map(value => value.split(' ')[0].toLowerCase()).join(',');
-          query.append(key, values);
-        }
-      });
-    
-      // Tambahkan parameter dari searchParams jika ada
-      if (Object.keys(searchParams).length > 0) {
-        const searchParamsString = new URLSearchParams(searchParams).toString().toLowerCase();
-        const searchParamsEntries = new URLSearchParams(searchParamsString).entries();
-        
-        // Tambahkan parameter satu per satu
-        for (const [key, value] of searchParamsEntries) {
-          query.append(key, value);
-        }
-      }
-    
-      // Konversi ke string query
-      const queryString = query.toString();
-    
-      // Lakukan fetch data dengan URL yang digabungkan
-      const data = await getData(url, queryString);
-      setProducts(data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    } finally {
-      setLoading(false); // Selesai loading
-    }
-    
-  };
-
+  
   useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true)
+      try {
+        // Inisialisasi URLSearchParams untuk parameter query
+        const query = new URLSearchParams();
+      
+        // Tambahkan parameter dari selectedFilters
+        Object.keys(selectedFilters).forEach((key) => {
+          
+          if (selectedFilters[key].length > 0) {
+            const values = selectedFilters[key].map(value => value.split(' ')[0].toLowerCase()).join(',');
+            query.append(key, values);
+          }
+        });
+      
+        // Tambahkan parameter dari searchParams jika ada
+        if (Object.keys(searchParams).length > 0) {
+          const searchParamsString = new URLSearchParams(searchParams).toString().toLowerCase();
+          const searchParamsEntries = new URLSearchParams(searchParamsString).entries();
+          
+          // Tambahkan parameter satu per satu
+          for (const [key, value] of searchParamsEntries) {
+            query.append(key, value);
+          }
+        }
+      
+        // Konversi ke string query
+        const queryString = query.toString();
+      
+        // Lakukan fetch data dengan URL yang digabungkan
+        const data = await getData(url, queryString);
+        setProducts(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false); // Selesai loading
+      }
+    };
     fetchData()
-  }, [page, selectedFilters])
+  }, [page, selectedFilters, searchParams, url])
 
   const handleReset = () => {
     setSelectedFilters({

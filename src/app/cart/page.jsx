@@ -5,7 +5,6 @@ import CartContext from '@/context/CartContext';
 import formatCurrency from '@/utils/FormatCurrency';
 
 const Page = () => {
-  const currentUrl = typeof window !== 'undefined' ? window.location.origin : '';
   const [message, setMessage] = useState('');
   const { cart } = useContext(CartContext);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -18,6 +17,8 @@ const Page = () => {
   };
 
   useEffect(() => {
+      const currentUrl = typeof window !== 'undefined' ? window.location.origin : '';
+
       if (cart?.cartItems) {
           const calculatedTotal = calculateTotalPrice(cart.cartItems);
           setTotalPrice(calculatedTotal);
