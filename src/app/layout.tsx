@@ -27,7 +27,6 @@ export default function RootLayout({
     <html lang="en">
       <PreventRightClick>
         <body className={montserrat.className}>
-          <Whatsapp />
           <CartProvider>
             <FetchNavbar fontClass={yeseva.className} />
             {children}
@@ -35,6 +34,7 @@ export default function RootLayout({
               <Footer fontClass={yeseva.className} />
             </section>
           </CartProvider>
+          <Whatsapp />
           </body>
       </PreventRightClick>
     </html>

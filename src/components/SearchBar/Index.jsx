@@ -99,7 +99,7 @@ const SearchBar = ({setSearchOpen}) => {
               <h3 className="text-lg font-semibold my-4">Man Collections</h3>
               <hr />
               {filteredResults?.manCollections.map((item, index) => (
-                <Link key={index} href={`/collection/${item.id}`} passHref>
+                <Link key={index} href={`/collections/man-collections?category=${item.slug}`} passHref>
                   <div className="block p-2 hover:bg-gray-100 mb-2">
                     {item.name}
                   </div>
@@ -112,7 +112,7 @@ const SearchBar = ({setSearchOpen}) => {
               <h3 className="text-lg font-semibold my-4">Woman Collections</h3>
               <hr />
               {filteredResults?.womanCollections.map((item, index) => (
-                <Link key={index} href={`/collection/${item.id}`} passHref>
+                <Link key={index} href={`/collections/woman-collections?category=${item.slug}`} passHref>
                   <div className="block p-2 hover:bg-gray-100 mb-2">
                     {item.name}
                   </div>

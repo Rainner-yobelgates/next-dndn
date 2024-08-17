@@ -151,7 +151,7 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
                               <div className="py-2">
                                 {womanCategories?.payload.map((womanCategory, index) => {
                                   return (
-                                    <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" key={index} href={`/collections/woman-collections?category=${womanCategory.category.name}`}>{womanCategory.category.name}</Link>
+                                    <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" key={index} href={`/collections/woman-collections?category=${womanCategory.category.slug}`}>{womanCategory.category.name}</Link>
                                   )
                                 })}
                               </div>
@@ -252,8 +252,10 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
                             <div className="absolute left-full top-0 mt-2 w-56 shadow-lg rounded-md bg-white ring-1 ring-black ring-opacity-5">
                               <div className="py-2">
                                 {manCategories?.payload.map((manCategory, index) => {
+                                  console.log(manCategory);
+                                  
                                   return (
-                                    <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" key={index} href={`/collections/man-collections?category=${manCategory.category.name}`}>{manCategory.category.name}</Link>
+                                    <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" key={index} href={`/collections/man-collections?category=${manCategory.category.slug}`}>{manCategory.category.name}</Link>
                                   )
                                 })}
                               </div>
@@ -438,7 +440,7 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
                             <div className="py-2">
                               {womanCategories?.payload.map((womanCategory, index) => {
                                 return (
-                                  <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" key={index} href={`/collections/woman-collections?category=${womanCategory.category.name}`}>{womanCategory.category.name}</Link>
+                                  <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" key={index} href={`/collections/woman-collections?category=${womanCategory.category.slug}`}>{womanCategory.category.name}</Link>
                                 )
                               })}
                             </div>
@@ -539,7 +541,7 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
                             <div className="py-2">
                               {manCategories?.payload.map((manCategory, index) => {
                                 return (
-                                  <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" key={index} href={`/collections/man-collections?category=${manCategory.category.name}`}>{manCategory.category.name}</Link>
+                                  <Link className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" key={index} href={`/collections/man-collections?category=${manCategory.category.slug}`}>{manCategory.category.name}</Link>
                                 )
                               })}
                             </div>
