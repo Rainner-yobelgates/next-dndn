@@ -233,8 +233,6 @@ const page = ({ params, searchParams }) => {
         <div className="lg:w-[75%] w-full ">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
             {products.payload?.data.map((product, index) => {
-              console.log(product.images, product.name);
-              
               return (
                 <Link href={`/product/${product.slug}`} key={product.id}>
                   <div className="card bg-base-100 w-full shadow-xl">

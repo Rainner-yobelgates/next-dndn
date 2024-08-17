@@ -9,7 +9,6 @@ import { FaRegTrashAlt } from 'react-icons/fa'
 
 const CartItem = () => {
     const { addItemToCart, cart, deleteItemCart } = useContext(CartContext);
-    console.log(cart);
     
     //Ketika quantity sama maka akan ditambah 1
     const increaeseQty = (item) => {
@@ -40,12 +39,19 @@ const CartItem = () => {
                 </div>
                 <div className="w-full">
                     <div className="flex flex-col lg:flex-row justify-between">
-                        <p className="text-lg lg:text-2xl font-semibold text-slate-800">
+                        <p className="text-lg lg:text-2xl font-semibold text-slate-800 mb-1">
                             {item.name}
                         </p>
                         <p className="text-sm lg:text-md font-medium text-slate-600 block lg:hidden">
                             {item.brand}
                         </p>
+                        <div className="flex lg:hidden">
+                            {Object.entries(item.variant).map(([key, value]) => (
+                                <p className="text-sm lg:text-md font-medium text-slate-600 block lg:hidden mr-2">
+                                {key} : <b>{value}</b>
+                                </p>
+                            ))}
+                        </div>
                         <p className="text-sm lg:text-md font-bold text-slate-600 mt-2">
                             IDR {formatCurrency(item.price)}
                         </p>
@@ -53,7 +59,12 @@ const CartItem = () => {
                     <p className="text-sm lg:text-md font-medium text-slate-600 hidden lg:block">
                         {item.brand}
                     </p>
-                    <div className="flex mt-4 items-center justify-between">
+                    {Object.entries(item.variant).map(([key, value]) => (
+                        <p className="text-sm lg:text-md font-medium text-slate-600 hidden lg:block">
+                            {key} : <b>{value}</b>
+                        </p>
+                    ))}
+                    <div className="flex mt-2 items-center justify-between">
                         <div className="flex text-sm lg:text-md text-slate-600 gap-2">
                             <p className="font-semibold">Quantity :</p>
                             <div className="flex items-center">

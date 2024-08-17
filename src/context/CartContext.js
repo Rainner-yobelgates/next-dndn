@@ -16,9 +16,9 @@ export const CartProvider = ({children}) => {
         )
     }
 
-    const addItemToCart = async ({name, slug, price, image, stock, brand, quantity, }) => {
+    const addItemToCart = async ({name, slug, price, image, stock, variant, brand, quantity, }) => {
         
-        const item = {name, slug, price, image, stock, brand, quantity}
+        const item = {name, slug, price, image, stock, variant, brand, quantity}
         let newCartItems
         const isItemExist = cart?.cartItems?.find((i) => i.slug === item.slug)
 
@@ -36,7 +36,7 @@ export const CartProvider = ({children}) => {
 
             newCartItems = cart.cartItems.map((i) =>
                 i.slug === isItemExist.slug
-                    ? { name:item.name, slug:item.slug, price:item.price, stock:item.stock, brand:item.brand, image:item.image ,quantity: newQuantity }
+                    ? { name:item.name, slug:item.slug, price:item.price, stock:item.stock, variant:item.variant, brand:item.brand, image:item.image ,quantity: newQuantity }
                     : i
             );
         }else{

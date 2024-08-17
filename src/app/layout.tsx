@@ -4,6 +4,7 @@ import "./globals.css";
 import FetchNavbar from "@/utils/FetchNavbar";
 import Footer from "@/components/Footer/Index";
 import { CartProvider } from "@/context/CartContext"
+import PreventRightClick from "@/utils/PreventRightClick";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 const yeseva = Yeseva_One({
@@ -21,18 +22,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en">
-      <body className={montserrat.className}>
-        <CartProvider>
-          <FetchNavbar fontClass={yeseva.className} />
-          {children}
-          <section className="pt-24 lg:pt-28">
-            <Footer fontClass={yeseva.className} />
-          </section>
-        </CartProvider>
-        </body>
+      <PreventRightClick>
+        <body className={montserrat.className}>
+          <CartProvider>
+            <FetchNavbar fontClass={yeseva.className} />
+            {children}
+            <section className="pt-24 lg:pt-28">
+              <Footer fontClass={yeseva.className} />
+            </section>
+          </CartProvider>
+          </body>
+      </PreventRightClick>
     </html>
   );
 }
