@@ -3,7 +3,7 @@ import { getData } from '@/libs/dndn-api';
 import DetailProduct from '@/components/DetailProduct/index'
 import { useEffect, useState } from 'react';
 
-const page = ({ params: { slug } }) => {
+const Page = ({ params: { slug } }) => {
     const [product, setProduct] = useState([]);
     const [newArrival, setNewArrival] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -47,4 +47,4 @@ const page = ({ params: { slug } }) => {
     )
 }
 
-export default page
+export default Page

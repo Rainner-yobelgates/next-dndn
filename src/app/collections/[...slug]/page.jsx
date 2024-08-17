@@ -5,7 +5,7 @@ import Link from 'next/link';
 import formatCurrency from '@/utils/FormatCurrency';
 import Image from 'next/image';
 
-const page = ({ params, searchParams }) => {
+const Page = ({ params, searchParams }) => {
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(1)
   const [products, setProducts] = useState([])
@@ -271,4 +271,4 @@ const page = ({ params, searchParams }) => {
   )
 }
 
-export default page
+export default Page

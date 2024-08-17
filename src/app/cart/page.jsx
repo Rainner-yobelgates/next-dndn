@@ -4,7 +4,7 @@ import CartItem from '@/components/CartItem'
 import CartContext from '@/context/CartContext';
 import formatCurrency from '@/utils/FormatCurrency';
 
-const page = () => {
+const Page = () => {
   const currentUrl = typeof window !== 'undefined' ? window.location.origin : '';
   const [message, setMessage] = useState('');
   const { cart } = useContext(CartContext);
@@ -70,4 +70,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

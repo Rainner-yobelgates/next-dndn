@@ -3,6 +3,7 @@ import { Montserrat, Yeseva_One } from "next/font/google";
 import "./globals.css";
 import FetchNavbar from "@/utils/FetchNavbar";
 import Footer from "@/components/Footer/Index";
+import Whatsapp from "@/utils/Whatsapp";
 import { CartProvider } from "@/context/CartContext"
 import PreventRightClick from "@/utils/PreventRightClick";
 
@@ -26,6 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <PreventRightClick>
         <body className={montserrat.className}>
+          <Whatsapp />
           <CartProvider>
             <FetchNavbar fontClass={yeseva.className} />
             {children}
