@@ -34,19 +34,22 @@ const DetailProduct = ({ product, newArrival }) => {
         }));
     };
     useEffect(() => {
+        const variantType = product.payload.attributes.reduce((acc, item) => {
+            acc[item.id] = item.name;
+            return acc;
+          }, {});
+        
         const findMatchingItems = (data, criteria) => {
             
             return data.filter(item => {
               // Membuat objek untuk memetakan atribut berdasarkan kunci
               const attributeMap = item.combinations.reduce((acc, combination) => {
-                const attributeName = combination.value.attribute_id === 16 ? 'Warna' : 'Ukuran'; // Mapping attribute_id ke nama atribut
+                const attributeName = variantType[combination.value.attribute_id] || 'undefined'; // Mapping attribute_id ke nama atribut
                 acc[attributeName] = combination.value.value;
                 return acc;
               }, {});
-          
-              setDisableBtn(Object.keys(criteria).length === 0 ? true : false);
+
               // Periksa apakah semua kriteria cocok
-              
               return Object.entries(criteria).every(([key, value]) => attributeMap[key] === value);
             });
           };
