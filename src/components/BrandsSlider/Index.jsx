@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -7,12 +7,46 @@ import Image from 'next/image';
 
 
 
-const BrandsSlider = ({api}) => {
-  console.log();
+const BrandsSlider = ({api, loading}) => {
+    const [columns, setColumns] = useState(1);
+    useEffect(() => {
+        const handleResize = () => {
+          const width = window.innerWidth;
+          if (width >= 1024) {
+            setColumns(4);
+          } else if (width >= 768) {
+            setColumns(2);
+          } else {
+            setColumns(1);
+          }
+        };
+    
+        handleResize();
+    
+        window.addEventListener('resize', handleResize);
+    
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }, []);
+  if (loading) {
+      return (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 px-6">
+          {Array.from({ length: columns }).map((_, index) => (
+              <div className="flex-shrink-0 w-full">
+                  <div className="skeleton h-64 w-full"></div>
+                  <div className="skeleton h-4 w-28 mt-2"></div>
+                  <div className="skeleton h-4 w-full mt-2"></div>
+                  <div className="skeleton h-4 w-full mt-2"></div>
+              </div>
+          ))}
+      </div>
+      )
+  }
     let settings = {
       dots: true,
       infinite: true,
-      slidesToShow: api.payload.length > 6 ? 6 : api.payload.length,
+      slidesToShow: api.payload?.length > 6 ? 6 : api.payload?.length,
       slidesToScroll: 1,
       initialSlide: 0,
       arrows: false,
@@ -25,7 +59,7 @@ const BrandsSlider = ({api}) => {
           {
               breakpoint: 1024,
               settings: {
-                  slidesToShow: api.payload.length > 3 ? 3 : api.payload.length,
+                  slidesToShow: api.payload?.length > 3 ? 3 : api.payload?.length,
                   slidesToScroll: 1,
                   dots: true
               }
@@ -33,7 +67,7 @@ const BrandsSlider = ({api}) => {
           {
               breakpoint: 768,
               settings: {
-                  slidesToShow: api.payload.length > 2 ? 2 : api.payload.length,
+                  slidesToShow: api.payload?.length > 2 ? 2 : api.payload?.length,
                   slidesToScroll: 1,
                   dots: true
               }

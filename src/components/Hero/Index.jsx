@@ -1,7 +1,14 @@
 import Image from 'next/image'
 import React from 'react'
 
-const Hero = ({api}) => {
+const Hero = ({api, loading}) => {
+    if (loading) {
+        return (
+            <div className="carousel w-full">
+                <div className="skeleton h-[500px] w-full"></div>
+            </div>
+        )
+    }
   return (
     <div className="carousel w-full">
         {api.payload?.map((banner, index) => {

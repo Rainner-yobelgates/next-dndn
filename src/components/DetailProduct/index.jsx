@@ -5,6 +5,7 @@ import ProductImage from '@/components/ProductImage/index';
 import formatCurrency from '@/utils/FormatCurrency';
 import Link from 'next/link';
 import CartContext from '@/context/CartContext'
+import Swal from 'sweetalert2';
 
 const DetailProduct = ({ product, newArrival }) => {
     const [quantity, setQuantity] = useState(1)
@@ -14,17 +15,35 @@ const DetailProduct = ({ product, newArrival }) => {
     const { addItemToCart } = useContext(CartContext);
     const currentUrl = typeof window !== 'undefined' ? window.location.origin : '';
     
-    const addToCartHandler = () => {
-        addItemToCart({
-            name: product.payload.name,
-            slug: product.payload.slug,
-            price: product.payload.price,
-            image: product.payload.images[0].path,
-            stock: variantStock ? variantStock : product.payload.stock,
-            variant: selectedVariants,
-            brand: product.payload.brand.name,
-            quantity: quantity
-        })
+    const addToCartHandler = async () => {
+        try {
+            const result = await addItemToCart({
+                name: product.payload.name,
+                slug: product.payload.slug,
+                price: product.payload.price,
+                image: product.payload.images[0].path,
+                stock: variantStock ? variantStock : product.payload.stock,
+                variant: selectedVariants,
+                brand: product.payload.brand.name,
+                quantity: quantity
+            });
+            
+            Swal.fire({
+                icon: 'success',
+                title: "Success",
+                text: 'Item added to cart successfully', // Display success message from addItemToCart
+                showConfirmButton: false,
+                timer: 1500
+            });
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: "Oops...",
+                text: 'Failed to add item to cart',
+                text: error.message,
+                showConfirmButton: false
+            });
+        }
     }
 
     const handleVariant = (key, val) => {
@@ -55,12 +74,11 @@ const DetailProduct = ({ product, newArrival }) => {
           };
           
         const matchingItems = findMatchingItems(product.payload.variants, selectedVariants);
-        setDisableBtn(matchingItems.length === 1 ? false : true);
+        setDisableBtn(matchingItems.length === 1 || matchingItems.length === 0 ? false : true);
         setVariantStock(matchingItems[0]?.stock ?? null);
         setQuantity(1)
         
     }, [selectedVariants, product.payload.attributes, product.payload.variants])
-    
     return (
         <div className="container mx-auto">
             <div className="flex flex-wrap mb-16">

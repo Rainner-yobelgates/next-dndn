@@ -69,10 +69,10 @@ const SearchBar = ({setSearchOpen}) => {
               <h3 className="text-lg font-semibold mb-2">Products</h3>
               <hr />
               {filteredResults.products.map((item, index) => (
-                <Link key={index} href={`/product/${item.id}`} passHref>
+                <Link key={index} href={`/product/${item.slug}`} passHref>
                   <div className="flex p-2 border-b border-gray-200 hover:bg-gray-100">
                     {/* Gambar Produk */}
-                    <div className="relative w-32 h-32 mr-4">
+                    <div className="relative lg:w-32 lg:h-32 w-16 h-16 mr-4">
                       <Image
                         src={`https://api.al-miffa.or.id/storage/${item.images[0].path}`}
                         alt={item.name}

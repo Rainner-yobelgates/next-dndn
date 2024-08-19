@@ -1,3 +1,4 @@
+import Whatsapp from '@/utils/Whatsapp'
 import Link from 'next/link'
 import React from 'react'
 import { FaInstagram, FaWhatsapp } from 'react-icons/fa'
@@ -30,6 +31,7 @@ const Footer = ({ fontClass }) => {
             <Link href={"https://www.instagram.com/dndn.luxury/"} target="_blank"><FaInstagram size={36} color="#E1306C"/></Link>
             </div>
         </nav>
+        <Whatsapp />
     </footer>
   )
 }

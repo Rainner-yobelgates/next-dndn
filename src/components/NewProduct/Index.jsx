@@ -3,13 +3,27 @@ import formatCurrency from "@/utils/FormatCurrency";
 import Image from "next/image";
 import Link from "next/link";
 
-const NewProduct = ({api}) => {
-    
+const NewProduct = ({api, loading}) => {
+    if (loading) {
+        return (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 px-6">
+                {Array.from({ length: 4 }).map((_, index) => (
+                    <div key={index} className="flex-shrink-0 w-full">
+                        <div className="skeleton h-64 w-full"></div>
+                        <div className="skeleton h-4 w-28 mt-2"></div>
+                        <div className="skeleton h-4 w-full mt-2"></div>
+                        <div className="skeleton h-4 w-full mt-2"></div>
+                    </div>
+                ))}
+            </div>
+
+        )
+    }
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-4 gap-0 lg:gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 px-6">
         {api.payload?.data.map((product, index) => {
             return (
-                <Link href={`/product/${product.slug}`} key={index} className="p-4 lg:p-0">
+                <Link href={`/product/${product.slug}`} key={index}>
                     <div className="card bg-base-100 shadow-xl">
                         <figure className="flex h-64"> {/* Set a fixed height for the figure */}
                             <Image

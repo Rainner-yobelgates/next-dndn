@@ -40,6 +40,11 @@ const Page = ({ params, searchParams }) => {
     to_price: []
   });
 
+  const [tempFilters, setTempFilters] = useState({
+    from_price: selectedFilters.from_price || '',
+    to_price: selectedFilters.to_price || '',
+  });
+  
   const [isOpen, setIsOpen] = useState({
     with_stock: false,
     with_type: false,
@@ -65,10 +70,25 @@ const Page = ({ params, searchParams }) => {
     });
   };
 
+  const handlePriceChange = (event) => {
+    const { name ,value } = event.target;
+
+    setTempFilters((prevFilters) => ({
+      ...prevFilters,
+      [name]: [value],
+    }));
+    
+  };
+  const handleApply = () => {
+    setSelectedFilters((prevFilters) => ({
+      ...prevFilters,
+      ...tempFilters,
+    }));
+  };
+
   const handleDropdownChange = (event) => {
     const { name ,value } = event.target;
 
-    // Update the specific key in the state
     setSelectedFilters((prevFilters) => ({
       ...prevFilters,
       [name]: [value],
@@ -128,6 +148,10 @@ const Page = ({ params, searchParams }) => {
 
   const handleReset = () => {
     setSelectedFilters({
+      from_price: '',
+      to_price: '',
+    });
+    setTempFilters({
       from_price: '',
       to_price: '',
     });
@@ -192,37 +216,43 @@ const Page = ({ params, searchParams }) => {
               </button>
 
               {isOpen['price'] && (
-                <div className="absolute left-0 mt-2 bg-white border border-gray-300 shadow-lg rounded-md px-4 pb-4 w-[calc(100%+2rem)] z-10">
-                  <div className="flex justify-end mt-2">
-                    <button
-                      type="button"
-                      onClick={handleReset}
-                      className="py-1 px-4 rounded-md transition-colors text-red-600 hover:text-red-800 text-sm"
-                    >
-                      Reset
-                    </button>
-                  </div>
-                    <hr className="mb-2" />
+                <div className="absolute left-0 mt-2 bg-white border border-gray-300 shadow-lg rounded-md px-4 py-4 w-[calc(100%+2rem)] z-10">
                 <div className="flex justify-between items-center mb-2">
                   <label className="text-sm font-medium mr-2">Rp</label>
                   <div className="flex space-x-2 w-full">
                     <input
                       type="number"
                       name="from_price"
-                      value={selectedFilters.from_price || ''}
-                      onChange={handleDropdownChange}
+                      value={tempFilters.from_price || ''}
+                      onChange={handlePriceChange}
                       placeholder="From"
                       className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                     />
                     <input
                       type="number"
                       name="to_price"
-                      value={selectedFilters.to_price || ''}
-                      onChange={handleDropdownChange}
+                      value={tempFilters.to_price || ''}
+                      onChange={handlePriceChange}
                       placeholder="To"
                       className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                     />
                   </div>
+                </div>
+                <div className="flex justify-between mt-2">
+                <button
+                      type="button"
+                      onClick={handleReset}
+                      className="py-1 px-4 rounded-md transition-colors text-red-600 hover:text-red-800 text-sm"
+                    >
+                      Reset
+                    </button>
+                <button
+                      type="button"
+                      onClick={handleApply}
+                      className="py-2 px-4 rounded-md transition-colors bg-[#fff4f4] text-sm font-semibold border hover:bg-slate-500 hover:text-white"
+                    >
+                      Apply
+                    </button>
                 </div>
               </div>
               )}

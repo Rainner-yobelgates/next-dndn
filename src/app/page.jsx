@@ -17,7 +17,8 @@ export default function Home() {
   const [newProducts, setNewProducts] = useState([]);
   const [brands, setBrands] = useState([]);
   const [hero, setHero] = useState([]);
-
+  // const hash = window.location.hash
+  
   useEffect(() => {
     // Fungsi untuk fetch data
     async function fetchData() {
@@ -44,18 +45,17 @@ export default function Home() {
 
     fetchData();
   }, []);
-
-  if (loading) {
-    return (
-    <div className="fixed inset-0 bg-white bg-opacity-100 flex items-center justify-center z-50">
-      <span className="loading loading-spinner loading-lg"></span>
-    </div>
-    ) // Tampilkan loader saat data sedang di-fetch
-  }
+  // if (loading) {
+  //   return (
+  //   <div className="fixed inset-0 bg-white bg-opacity-100 flex items-center justify-center z-50">
+  //     <span className="loading loading-spinner loading-lg"></span>
+  //   </div>
+  //   )
+  // }
   return (
    <>
    <section>
-    <Hero api={hero} />
+    <Hero api={hero} loading={loading} />
     <div className="flex justify-center pt-14 gap-5">
     <Link href={"https://api.whatsapp.com/send?phone=6281617171488&"} target="_blank"><FaWhatsapp size={36} color="#25D366" /></Link>
             <Link href={"https://www.instagram.com/dndn.luxury/"} target="_blank"><FaInstagram size={36} color="#E1306C"/></Link>
@@ -66,13 +66,13 @@ export default function Home() {
     <div className="container mx-auto">
       <h1 className="text-center font-bold text-2xl lg:text-3xl mb-10 uppercase">New Products</h1>
       <p className="text-end mr-4 text-slate-500 font-semibold underline text-sm mb-2"><Link href="/collections/new-arrival-collections">View All</Link></p>
-      <NewProducts api={newProducts} />
+      <NewProducts api={newProducts} loading={loading} />
     </div>
    </section>
    <section className="pt-14">
     <div className="container mx-auto">
       <h1 className="text-center font-bold text-2xl lg:text-3xl mb-10 uppercase">Our Brands</h1>
-      <BrandsSlider api={brands} />
+      <BrandsSlider api={brands} loading={loading} />
     </div>
    </section>
 
@@ -80,14 +80,14 @@ export default function Home() {
     <div className="container mx-auto">
       <h1 className="text-center font-bold text-2xl lg:text-3xl mb-10 uppercase">Woman Collections</h1>
       <p className="text-end mr-4 text-slate-500 font-semibold underline text-sm mb-2"><Link href="/collections/woman-collections">View All</Link></p>
-      <Product api={womanCollection} />
+      <Product api={womanCollection} loading={loading} />
     </div>
    </section>
    <section className="pt-16 lg:pt-20">
     <div className="container mx-auto">
       <h1 className="text-center font-bold text-2xl lg:text-3xl mb-10 uppercase">Man Collections</h1>
       <p className="text-end mr-4 text-slate-500 font-semibold underline text-sm mb-2"><Link href="/collections/man-collections">View All</Link></p>
-      <Product api={manCollection} />
+      <Product api={manCollection} loading={loading} />
     </div>
    </section>
    <section className="pt-16 lg:pt-20" id="faq">

@@ -9,26 +9,19 @@ const Page = ({ params: { slug } }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Pastikan slug sudah tersedia sebelum melakukan fetch
         if (!slug) return;
     
-        // Fungsi untuk fetch data
         async function fetchData() {
-            setLoading(true); // Selesai loading
-
-          // Fetch product data berdasarkan slug
+            setLoading(true);
           try {
-            // Fetch product data berdasarkan slug
             const fetchProduct = await getData(`product/${slug}`);
             setProduct(fetchProduct);
-    
-            // Fetch new arrivals collection
             const fetchNewArrival = await getData("collections/new-arrival-collections");
             setNewArrival(fetchNewArrival);
           } catch (error) {
             console.error('Error fetching data:', error);
           } finally {
-            setLoading(false); // Selesai loading
+            setLoading(false);
           }
         }
     

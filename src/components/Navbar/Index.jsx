@@ -305,7 +305,7 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
                   className="inline-flex justify-center w-full px-3 py-2 text-sm font-medium hover:text-slate-400"
                   aria-haspopup="true"
                   aria-expanded="false"
-                  href={"/collections"}
+                  href={"/collections/new-arrival-collections"}
                 >
                   Brands
                   <svg
@@ -325,7 +325,7 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
 
                 <div className="absolute z-10 hidden group-hover:block group-hover:opacity-100 opacity-0 transition-opacity duration-300 ease-in-out w-56 shadow-lg rounded-md bg-white ring-1 ring-black ring-opacity-5">
                   <div className="py-2">
-                    {brands?.payload.map((brand, index) => {
+                    {brands.payload?.map((brand, index) => {
                       return (
                         <Link key={index} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href={`/collections/brand-collections?brand=${brand.name}`}>{brand.name}</Link>
                       )
@@ -611,7 +611,7 @@ export default function Navbar({brands, manBrands, womanBrands, manCategories, w
 
                 <div className="absolute z-10 hidden group-hover:block group-hover:opacity-100 opacity-0 transition-opacity duration-300 ease-in-out w-56 shadow-lg rounded-md bg-white ring-1 ring-black ring-opacity-5">
                   <div className="py-2">
-                    {brands?.payload.map((brand, index) => {
+                    {brands.payload?.map((brand, index) => {
                       return (
                         <Link key={index} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href={`/collections/brand-collections?brand=${brand.name}`}>{brand.name}</Link>
                       )

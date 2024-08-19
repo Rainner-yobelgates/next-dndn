@@ -26,16 +26,15 @@ export default function RootLayout({
   return (
     <html lang="en">
         <body className={montserrat.className}>
-      <PreventRightClick>
-          <CartProvider>
-            <FetchNavbar fontClass={yeseva.className} />
-            {children}
-            <section className="pt-24 lg:pt-28">
-              <Footer fontClass={yeseva.className} />
-            </section>
-          </CartProvider>
-          <Whatsapp />
-      </PreventRightClick>
+          <PreventRightClick>
+              <CartProvider>
+                <FetchNavbar fontClass={yeseva.className} />
+                {children}
+                <section className="pt-24 mt-20">
+                  <Footer fontClass={yeseva.className} />
+                </section>
+              </CartProvider>
+          </PreventRightClick>
           </body>
     </html>
   );

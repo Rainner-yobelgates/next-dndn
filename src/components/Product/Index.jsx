@@ -7,7 +7,7 @@ import Link from "next/link";
 import formatCurrency from '@/utils/FormatCurrency';
 import Image from "next/image";
 
-const Product = ({api}) => {
+const Product = ({api, loading}) => {
     let settings = {
         dots: true,
         infinite: false,
@@ -44,7 +44,22 @@ const Product = ({api}) => {
             }
         ]
     };
-    
+    if (loading) {
+        return (
+            <div className="slider-container">
+                <Slider {...settings}>
+                    {Array.from({ length: 4 }).map((_, index) => (
+                        <div key={index} className="flex-shrink-0 w-full p-4">
+                            <div className="skeleton h-64 w-full"></div>
+                            <div className="skeleton h-4 w-28 mt-2"></div>
+                            <div className="skeleton h-4 w-full mt-2"></div>
+                            <div className="skeleton h-4 w-full mt-2"></div>
+                        </div>
+                    ))}
+            </Slider>
+           </div>
+        )
+    }
   return (
      <div className="slider-container">
       <Slider {...settings}>
