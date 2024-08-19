@@ -33,7 +33,7 @@ const BrandsSlider = ({api, loading}) => {
       return (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 px-6">
           {Array.from({ length: columns }).map((_, index) => (
-              <div className="flex-shrink-0 w-full">
+              <div key={index} className="flex-shrink-0 w-full">
                   <div className="skeleton h-64 w-full"></div>
                   <div className="skeleton h-4 w-28 mt-2"></div>
                   <div className="skeleton h-4 w-full mt-2"></div>

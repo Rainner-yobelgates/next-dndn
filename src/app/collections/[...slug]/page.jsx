@@ -166,7 +166,7 @@ const Page = ({ params, searchParams }) => {
   return (
     <div className="container mx-auto">
       <div className="flex flex-wrap mx-5">
-        <div className="lg:w-[25%] w-full">
+        <div className="lg:w-[25%] w-full lg:pr-4">
           <div className="mt-10 flex flex-col items-center lg:items-start">
             <h1 className="text-md text-slate-600 uppercase mb-5 font-bold">Sort By</h1>
             <select defaultValue="alpha-asc" className="select select-bordered w-full max-w-xs mb-3" name="sort_by" onChange={handleDropdownChange}>
@@ -259,7 +259,7 @@ const Page = ({ params, searchParams }) => {
             </div>
           </div>
         </div>
-        <div className="lg:w-[75%] w-full ">
+        <div className="lg:w-[75%] w-full lg:pl-4">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
             {products.payload?.data.map((product, index) => {
               return (
