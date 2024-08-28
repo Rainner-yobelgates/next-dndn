@@ -84,7 +84,7 @@ export default function Home() {
         {/* Brand Kita */}
         <BrandList data={dataBrand} isLoading={isLoadingBrand} />
         {/* Testimoni */}
-        <div className="space-y-8">
+        <section className="space-y-8" id="testimoni">
           <Carousel
             plugins={[plugin2.current]}
             opts={{
@@ -110,9 +110,9 @@ export default function Home() {
               ))}
             </CarouselContent>
           </Carousel>
-        </div>
+        </section>
         {/* Syarat, Ketentuan & FAQ */}
-        <div className="space-y-8">
+        <section className="space-y-8" id="faq">
           <div>
             <h1 className="text-2xl font-bold">Syarat & Ketentuan</h1>
             <p>
@@ -187,7 +187,7 @@ export default function Home() {
               </AccordionItem>
             </Accordion>
           </div>
-        </div>
+        </section>
       </div>
     </main >
   );
