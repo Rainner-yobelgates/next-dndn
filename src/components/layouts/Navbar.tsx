@@ -24,12 +24,12 @@ const Navbar = ({
                 "border-b",
             )}>
                 <div className={cn(
-                    "flex px-2 sm:px-4 lg:px-6 items-center",
+                    "flex justify-between px-2 sm:px-4 lg:px-6 items-center",
                     "py-3",
                     // "border-b",
                 )}>
                     <div className={cn(
-                        "hidden lg:flex w-full justify-start",
+                        "hidden lg:flex justify-start",
                     )}>
                         <a href="/" className={cn(
                             "text-2xl font-bold text-primary",
@@ -43,7 +43,7 @@ const Navbar = ({
                     <MobileNav />                    
                     <DekstopNav logoFont={logoFont} />
 
-                    <div className="w-full flex justify-end space-x-4">
+                    <div className="flex justify-end space-x-4">
                         {/* Btn Keranjang & Search */}
                         <SearchButton />
                         <CartButton />

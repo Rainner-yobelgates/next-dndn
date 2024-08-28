@@ -174,7 +174,7 @@ const SearchButton = () => {
 
   return (
     <>
-      <Button
+      {/* <Button
         onClick={() => setOpen((open) => !open)}
         variant='outline'
         className='relative h-9 w-9 p-0 xl:h-10 xl:w-60 xl:justify-start xl:px-3 xl:py-2'
@@ -188,18 +188,25 @@ const SearchButton = () => {
           </abbr>
           K
         </kbd>
+      </Button> */}
+      <Button
+        onClick={() => setOpen((open) => !open)}
+        variant='outline'
+        className='relative h-9 w-9 p-0'
+      >
+        <Search className='h-4 w-4 xl:mr-2' aria-hidden='true' />        
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput
           value={query}
           onValueChange={setQuery}
-          placeholder='Search products...'
+          placeholder='Cari produk...'
         />
         <CommandList >
           <CommandEmpty
             className={cn(isPending ? 'hidden' : 'py-6 text-center text-sm')}
           >
-            No products found.
+            Tidak ada produk yang ditemukan
           </CommandEmpty>
           {renderSearch()}          
         </CommandList>

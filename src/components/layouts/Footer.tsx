@@ -20,42 +20,46 @@ const Footer = ({ fontClass }: { fontClass: string }) => {
                         <p>
                             DNDN Luxury
                             <br />
-                            Fo of branded items since 2019
+                            Untuk barang bermerek sejak 2019
                         </p>
                     </aside>
                     <nav className="flex flex-col items-start">
                         <h6 className="font-bold text-lg">Links</h6>
                         <Link href={'/'} className={cn(
                             buttonVariants({
-                                variant: "link",                            
+                                variant: "link",
                             }),
                             "px-0",
-                        )}>Home</Link>
+                        )}>Beranda</Link>
                         <Link href={'/'} className={cn(
                             buttonVariants({
-                                variant: "link",                            
+                                variant: "link",
                             }),
                             "px-0",
-                        )}>New Products</Link>
+                        )}>Produk Terbaru</Link>
                         <Link href={'/'} className={cn(
                             buttonVariants({
-                                variant: "link",                            
+                                variant: "link",
                             }),
                             "px-0",
                         )}>Testimoni</Link>
                         <Link href={'/'} className={cn(
                             buttonVariants({
-                                variant: "link",                            
+                                variant: "link",
                             }),
                             "px-0",
-                        )}>Terms Condition & FAQ</Link>
+                        )}>Syarat & Ketentuan / FAQ</Link>
                     </nav>
                     <nav>
-                        <h6 className="font-bold text-lg">Contact Us</h6>
-                        <p className="w-80 link link-hover">Stay connected with us through our Contact Us page for any inquiries or further support</p>
-                        <div className="flex justify-center gap-5 pt-3">
-                            {/* <Link href={"https://api.whatsapp.com/send?phone=6281617171488&"} target="_blank"><FaWhatsapp size={36} color="#25D366" /></Link> */}
-                            {/* <Link href={"https://www.instagram.com/dndn.luxury/"} target="_blank"><FaInstagram size={36} color="#E1306C" /></Link> */}
+                        <h6 className="font-bold text-lg">Kontak Kita</h6>
+                        <p className="w-80 link link-hover">Tetap terhubung dengan kami melalui halaman Hubungi Kami untuk pertanyaan atau dukungan lebih lanjut</p>
+                        <div className="flex justify-start gap-2 pt-3">
+                            <Link href={"https://api.whatsapp.com/send?phone=6281617171488&"} target="_blank">
+                                <Icons.whatsapp size={45} color="#25D366" />
+                            </Link>
+                            <Link href={"https://www.instagram.com/dndn.luxury/"} className="text-[#E1306C]" target="_blank">
+                                <Icons.instagram size={45} />
+                            </Link>
                         </div>
                     </nav>
                 </footer>

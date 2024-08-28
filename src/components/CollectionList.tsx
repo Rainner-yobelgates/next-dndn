@@ -64,10 +64,10 @@ const CollectionList: React.FC<CollectionListProps> = ({ title, description, pro
         <div className="mt-8 space-y-8">
             <div className="flex justify-between">
                 <div>
-                    <h1 className="text-xl font-bold">
+                    <h1 className="text-3xl font-bold leading-[1.1]">
                         {title}
                     </h1>
-                    <p>
+                    <p className="leading-normal text-muted-foreground sm:text-lg sm:leading-7">
                         {description}
                     </p>
                 </div>

@@ -13,77 +13,116 @@ import ProductCard from "@/components/cards/ProductCard"
 import useCollection from "@/hooks/useCollection"
 import ProductCardSkeleton from "@/components/skeleton/ProductCardSkeleton"
 import { InputHTMLAttributes, useEffect, useState } from "react"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Plus } from "lucide-react"
+import toast from "react-hot-toast"
 
 
-const page = ({ params, searchParams }: {
+const page = ({
+    params,
+    // searchParams
+}: {
     params: {
         slug: string
     },
-    searchParams: URLSearchParams
+    // searchParams: URLSearchParams
 }) => {
+    const { slug } = params;
 
-    const path = usePathname()
-    const query = new URLSearchParams()
+    const router = useRouter();
+    const path = usePathname();
+    const searchParams = useSearchParams();
 
-    const { slug } = params
+    // State variables for filters
+    const [sortBy, setSortBy] = useState<string | null>(searchParams.get("sort_by"));
+    const [withStock, setWithStock] = useState<string | null>(searchParams.get("with_stock"));
+    const [withType, setWithType] = useState<string | null>(searchParams.get("with_type"));
+    const [fromPrice, setFromPrice] = useState<string | null>(searchParams.get("from_price"));
+    const [toPrice, setToPrice] = useState<string | null>(searchParams.get("to_price"));
 
+    // Fetch data based on current filters
     const { data: dataCollection, isLoading: isLoadingCollection, refetch } = useCollection(slug, {
         query: searchParams,
-    })
+    });
 
-    // query
-    const [queryTxt, setQueryTxt] = useState<string>('')
-    // sort_by (asc, desc, price-asc, price-desc, date-asc, date-desc)
-    const [sortBy, setSortBy] = useState<string | undefined>()
-    // with_stock (in, out)
-    const [withStock, setWithStock] = useState<string | undefined>()
-    // with_type (man, woman)
-    const [withType, setWithType] = useState<string | undefined>()
-    // from_price (number) & to_price (number)
-    const [fromPrice, setFromPrice] = useState<string | undefined>()
-    const [toPrice, setToPrice] = useState<string | undefined>()
+    // Handle URL query updates
+    // const updateQuery = () => {
+    //     const query = new URLSearchParams();
 
-    const handleSortBy = (value: string) => {
-        setSortBy(value)
-    }
+    //     if (sortBy) query.set("sort_by", sortBy);
+    //     if (withStock) query.set("with_stock", withStock);
+    //     if (withType) query.set("with_type", withType);
+    //     if (fromPrice && toPrice) {
+    //         query.set("from_price", fromPrice);
+    //         query.set("to_price", toPrice);
+    //     }
 
-    const handleWithStock = (value: string) => {
-        if (withStock === value) {
-            setWithStock(undefined)
-        } else {
-            setWithStock(value)
-        }
-    }
+    //     router.push(`${path}?${query.toString()}`);
 
-    const handleWithType = (value: string) => {
-        if (withType === value) {
-            setWithType(undefined)
-        } else {
-            setWithType(value)
-        }
-    }
-
-    const handleFromPrice = (value: InputHTMLAttributes<HTMLInputElement>) => {
-        setFromPrice(value.value as string)
-    }
-
-    const handleToPrice = (value: InputHTMLAttributes<HTMLInputElement>) => {
-        setToPrice(value.value as string)
-    }
+    //     refetch();
+    // };
 
     useEffect(() => {
+        const query = new URLSearchParams();
 
-        // if (sortBy) query.set('sort_by', sortBy)
-        // if (withStock) query.set('with_stock', withStock)
-        // if (withType) query.set('with_type', withType)
-        // if (fromPrice) query.set('from_price', fromPrice)
-        // if (toPrice) query.set('to_price', toPrice)
+        if (sortBy) query.set('sort_by', sortBy);
+        if (!sortBy) query.delete('sort_by');
+        if (withStock) query.set('with_stock', withStock);
+        if (!withStock) query.delete('with_stock');
+        if (withType) query.set('with_type', withType);
+        if (!withType) query.delete('with_type');
+        if (fromPrice) query.set('from_price', fromPrice);
+        if (!fromPrice) query.delete('from_price');
+        if (toPrice) query.set('to_price', toPrice);
+        if (!toPrice) query.delete('to_price');
 
-        // if (query.toString().length > 0)
-        //     window.location.assign(`/${path}?${query.toString()}`)
-    }, [sortBy, withStock, withType, fromPrice, toPrice])
+        const newUrl = `/${path}?${query.toString()}`;
+        // window.history.replaceState(null, '', newUrl);
+        router.push(`${path}?${query.toString()}`);
+        // router.replace(`${path}?${query.toString()}`);
+
+        // refetch();
+
+    }, [sortBy, withStock, withType, fromPrice, toPrice]);
+
+    useEffect(() => {
+        // Refetch data when the URL (or searchParams) changes
+        refetch();
+    }, [searchParams]);
+
+    // Handle filter changes
+    const handleSortByChange = (value: string) => {
+        setSortBy(sortBy === value ? null : value);
+    };
+
+    const handleWithStockChange = (value: string) => {
+        setWithStock(withStock === value ? null : value);
+    };
+
+    const handleWithTypeChange = (value: string) => {
+        setWithType(withType === value ? null : value);
+        // updateQuery();
+    };
+
+    const handleFromPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFromPrice(e.target.value);
+    };
+
+    const handleToPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setToPrice(e.target.value);
+    };
+
+    const applyPriceFilter = () => {
+        // if (fromPrice && toPrice) {
+        //     updateQuery();
+        // } else {
+        //     toast.error("Please enter both 'from' and 'to' price values");
+        // }
+
+        if (!fromPrice || !toPrice) {
+            toast.error("Please enter both 'from' and 'to' price values");
+        }
+    };
 
 
     const renderProduct = () => {
@@ -126,27 +165,27 @@ const page = ({ params, searchParams }: {
                                         <AccordionContentPlus>
                                             <ul className="mb-2 space-y-2">
                                                 <li className="text-base text-black space-x-2">
-                                                    <Checkbox />
+                                                    <Checkbox onCheckedChange={() => handleSortByChange("alpha-asc")} checked={sortBy === "alpha-asc"} />
                                                     <span>Alfabetis, A-Z</span>
                                                 </li>
                                                 <li className="text-base text-black space-x-2">
-                                                    <Checkbox />
+                                                    <Checkbox onCheckedChange={() => handleSortByChange("alpha-desc")} checked={sortBy === "alpha-desc"} />
                                                     <span>Alfabetis, Z-A</span>
                                                 </li>
                                                 <li className="text-base text-black space-x-2">
-                                                    <Checkbox />
+                                                    <Checkbox onCheckedChange={() => handleSortByChange("price-asc")} checked={sortBy === "price-asc"} />
                                                     <span>Harga, terendah ke tertinggi</span>
                                                 </li>
                                                 <li className="text-base text-black space-x-2">
-                                                    <Checkbox />
+                                                    <Checkbox onCheckedChange={() => handleSortByChange("price-desc")} checked={sortBy === "price-desc"} />
                                                     <span>Harga, tertinggi ke terendah</span>
                                                 </li>
                                                 <li className="text-base text-black space-x-2">
-                                                    <Checkbox />
+                                                    <Checkbox onCheckedChange={() => handleSortByChange("date-asc")} checked={sortBy === "date-asc"} />
                                                     <span>Tanggal, lama ke terbaru</span>
                                                 </li>
                                                 <li className="text-base text-black space-x-2">
-                                                    <Checkbox />
+                                                    <Checkbox onCheckedChange={() => handleSortByChange("date-desc")} checked={sortBy === "date-desc"} />
                                                     <span>Tanggal, baru ke terlama</span>
                                                 </li>
                                             </ul>
@@ -166,11 +205,11 @@ const page = ({ params, searchParams }: {
                                         <AccordionContentPlus>
                                             <ul className="mb-2 space-y-2">
                                                 <li className="text-base text-black space-x-2">
-                                                    <Checkbox onCheckedChange={() => handleWithStock('in')} checked={withStock === 'in'} />
+                                                    <Checkbox onCheckedChange={() => handleWithStockChange('in')} checked={withStock === 'in'} />
                                                     <span>Masih Tersedia</span>
                                                 </li>
                                                 <li className="text-base text-black space-x-2">
-                                                    <Checkbox onCheckedChange={() => handleWithStock('out')} checked={withStock === 'out'} />
+                                                    <Checkbox onCheckedChange={() => handleWithStockChange("out")} checked={withStock === 'out'} />
                                                     <span>Tidak Tersedia</span>
                                                 </li>
                                             </ul>
@@ -188,11 +227,11 @@ const page = ({ params, searchParams }: {
                                             <AccordionContentPlus>
                                                 <ul className="mb-2 space-y-2">
                                                     <li className="text-base text-black space-x-2">
-                                                        <Checkbox onCheckedChange={() => handleWithType("man")} checked={withType === 'man'} />
+                                                        <Checkbox onCheckedChange={() => handleWithTypeChange("man")} checked={withType === 'man'} />
                                                         <span>Pria</span>
                                                     </li>
                                                     <li className="text-base text-black space-x-2">
-                                                        <Checkbox onCheckedChange={() => handleWithType("woman")} checked={withType === 'woman'} />
+                                                        <Checkbox onCheckedChange={() => handleWithTypeChange("woman")} checked={withType === 'woman'} />
                                                         <span>Wanita</span>
                                                     </li>
                                                 </ul>
@@ -218,12 +257,17 @@ const page = ({ params, searchParams }: {
                                                 </div>
                                                 <div className="col-span-5">
                                                     <div className="flex space-x-2 items-center">
-                                                        <Input onChange={handleFromPrice} type="number" className="w-1/2" placeholder="dari" min={0} />
-                                                        <Input onChange={handleToPrice} type="number" className="w-1/2" placeholder="menjadi" min={0} />
+                                                        <Input onChange={handleFromPriceChange} type="number" className="w-1/2" placeholder="dari" min={0} />
+                                                        <Input onChange={handleToPriceChange} type="number" className="w-1/2" placeholder="menjadi" min={0} />
                                                     </div>
                                                     <div className="mt-5 flex justify-between">
-                                                        <Button variant={'outline'}>Reset</Button>
-                                                        <Button >Terapkan</Button>
+                                                        <Button variant={'outline'}
+                                                            onClick={() => {
+                                                                setFromPrice(null);
+                                                                setToPrice(null);
+                                                            }}
+                                                        >Reset</Button>
+                                                        <Button onClick={applyPriceFilter} >Terapkan</Button>
                                                     </div>
                                                 </div>
                                             </div>
