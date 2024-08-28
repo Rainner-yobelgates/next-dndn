@@ -4,14 +4,15 @@
 import { ShoppingCart } from 'lucide-react'
 import { MouseEventHandler, useEffect, useState } from 'react'
 
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import useCart from '@/hooks/useCart'
-import { formatPrice } from '@/lib/utils'
+import { cn, formatPrice } from '@/lib/utils'
 import { Separator } from '@/components/ui/separator'
 import { Attribute, Combination, Product, Variant } from '@/types/product'
 import { Icons } from './Icons'
 import { Input } from './ui/input'
 import { ToggleGroup, ToggleGroupItem } from './ui/toggle-group'
+import Link from 'next/link'
 
 interface InfoProps {
   product: Product
@@ -22,6 +23,7 @@ const Info: React.FC<InfoProps> = ({ product }) => {
   const [selectedAttributeValues, setSelectedAttributeValues] = useState<string[]>([])
   const [variantStock, setVariantStock] = useState<string | number | null | undefined>(product.stock)
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
+  const currentUrl = typeof window !== 'undefined' ? window.location.origin : ''
 
   const cart = useCart()
 
@@ -31,7 +33,7 @@ const Info: React.FC<InfoProps> = ({ product }) => {
       cart.addItem(Array.from({ length: quantity }).map(() => selectedProduct))
     } else {
       cart.addItem(Array.from({ length: quantity }).map(() => product))
-    }   
+    }
   }
 
   const handleVariantStock = (attrValue: string) => {
@@ -116,10 +118,15 @@ const Info: React.FC<InfoProps> = ({ product }) => {
         </div>
       </div>
       <div className='mt-10 flex items-center gap-x-2'>
-        <Button onClick={onAddToCart} className='flex items-center gap-x-2 hover:bg-green-700 bg-green-800'>
+        <Link target="_blank" href={`https://api.whatsapp.com/send?phone=6281617171488&text=Hai%20Min%2C%20Aku%20tertarik%20dengan%20${product.name}.%20Apakah%20bisa%20dibantu%3F%20${currentUrl}/product/${product.slug}`}
+          className={cn(
+            buttonVariants(),
+            "flex items-center gap-x-2 hover:bg-green-700 bg-green-800",
+          )}
+        >
           Pesan by WhatsApp
           <Icons.whatsapp />
-        </Button>
+        </Link>
         <Button onClick={onAddToCart} className='flex items-center gap-x-2' disabled={(product.attributes ?? []).length > 0 ? (selectedProduct ? false : true) : false}>
           Tambah ke Keranjang
           <ShoppingCart />

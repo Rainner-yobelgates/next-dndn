@@ -1,78 +1,45 @@
 'use client'
-
-import { useMutation } from '@tanstack/react-query'
-import axios, { AxiosError } from 'axios'
-import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { toast } from 'react-hot-toast'
-
 import { Button } from '@/components/ui/button'
 import useCart from '@/hooks/useCart'
 import { formatPrice } from '@/lib/utils'
 
 const Summary = () => {
-  const [token, setToken] = useState<string>('')
-  const router = useRouter()
+  const [message, setMessage] = useState('');
   const cart = useCart()
 
   const totalPrice = cart.items.reduce((total, item) => {
     return total + Number(item.price)
   }, 0)
 
-  const { mutate: onCheckout, isPending } = useMutation({
-    mutationFn: async () => {
-      const productIds = cart.items.map((item) => item.id)
-      const { data } = await axios.post('/api/payments/charge', { productIds })
-
-      return data
-    },
-    onError(error) {
-      if (error instanceof AxiosError) {
-        toast.error(error.response?.data)
-      }
-    },
-    onSuccess(data) {
-      setToken(data.token)
-      cart.removeAll()
-    },
-  })
-
   useEffect(() => {
-    if (token) {
-      // @ts-expect-error
-      window.snap.pay(token, {
-        onSuccess: () => {
-          router.push('/dashboard/orders')
-          toast.success('Payment success!')
-        },
-        onPending: () => {
-          router.push('/dashboard/orders')
-          toast('Waiting your payment..')
-        },
-        onError: () => {
-          toast.error('Payment failed, something went wrong')
-        },
-        onClose: () => {
-          window.location.assign('/dashboard/orders')
-          toast.error('You have not completed the payment.')
-        },
-      })
+    const currentUrl = typeof window !== 'undefined' ? window.location.origin : ''
+    if (cart.items.length > 0) {
+      setMessage(
+        `Halo,\n\n` +
+        `Saya ingin memesan produk berikut:\n` +
+        `${cart.getItems()
+          .map((item) => (
+            `Nama Produk : ${item.name}\n` +
+            `Harga       : ${formatPrice(item.price as number)}\n` +
+            `Jumlah      : ${cart.getQuantity(item.id!)}\n` +
+            `Brand       : ${item.brand!.name}\n` +
+            `Subtotal    : ${formatPrice((item.price as number) * cart.getQuantity(item.id!))}\n` +
+            `Link Produk : ${currentUrl}/product/${item.slug}`
+          )).join('\n\n')}\n\n` +
+        `Total Pembelian : ${formatPrice(totalPrice)}\n\n` +
+        `Terima kasih.`
+      );
+
     }
-  }, [token, router])
+  }, [cart.items]);
 
-  useEffect(() => {
-    const midtransUrl = 'https://app.sandbox.midtrans.com/snap/snap.js'
-
-    let scriptTag = document.createElement('script')
-    scriptTag.src = midtransUrl
-    scriptTag.setAttribute('data-client-key', process.env.MIDTRANS_CLIENT_KEY!)
-
-    document.body.appendChild(scriptTag)
-
-    return () => {
-      document.body.removeChild(scriptTag)
-    }
-  }, [])
+  const handleCheckout = () => {
+    // Replace 'nomor_telepon' with the actual phone number
+    const phoneNumber = 'nomor_telepon'; // e.g., '1234567890'
+    const url = `https://api.whatsapp.com/send?phone=6285776594448&text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
 
   return (
     <div
@@ -95,9 +62,8 @@ const Summary = () => {
           {formatPrice(totalPrice)}
         </div>
         <Button
-          isLoading={isPending}
-          disabled={cart.items.length === 0 || isPending}
-          onClick={() => onCheckout()}
+          disabled={cart.items.length === 0}
+          onClick={handleCheckout}
           className='w-full mt-6 hover:before:-translate-x-[500px]'
         >
           Checkout

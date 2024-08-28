@@ -124,14 +124,14 @@ const SearchButton = () => {
                 onSelect={() =>
                   handleSelect(() =>
                     router.push(
-                      `/collections/woman-collections?category=${product.slug}`,
+                      `/collections/man-collections?category=${product.slug}`,
                     ),
                   )
                 }
                 onClick={() =>
                   handleSelect(() =>
                     router.push(
-                      `/collections/woman-collections?category=${product.slug}`,
+                      `/collections/man-collections?category=${product.slug}`,
                     ),
                   )
                 }

@@ -20,47 +20,30 @@ import toast from "react-hot-toast"
 
 const page = ({
     params,
-    // searchParams
+    searchParams
 }: {
     params: {
         slug: string
     },
-    // searchParams: URLSearchParams
+    searchParams: URLSearchParams
 }) => {
     const { slug } = params;
 
     const router = useRouter();
     const path = usePathname();
-    const searchParams = useSearchParams();
+    const usearchParams = useSearchParams();
 
     // State variables for filters
-    const [sortBy, setSortBy] = useState<string | null>(searchParams.get("sort_by"));
-    const [withStock, setWithStock] = useState<string | null>(searchParams.get("with_stock"));
-    const [withType, setWithType] = useState<string | null>(searchParams.get("with_type"));
-    const [fromPrice, setFromPrice] = useState<string | null>(searchParams.get("from_price"));
-    const [toPrice, setToPrice] = useState<string | null>(searchParams.get("to_price"));
+    const [sortBy, setSortBy] = useState<string | null>(usearchParams.get("sort_by"));
+    const [withStock, setWithStock] = useState<string | null>(usearchParams.get("with_stock"));
+    const [withType, setWithType] = useState<string | null>(usearchParams.get("with_type"));
+    const [fromPrice, setFromPrice] = useState<string | null>(usearchParams.get("from_price"));
+    const [toPrice, setToPrice] = useState<string | null>(usearchParams.get("to_price"));
 
     // Fetch data based on current filters
     const { data: dataCollection, isLoading: isLoadingCollection, refetch } = useCollection(slug, {
-        query: searchParams,
+        query: usearchParams && searchParams,
     });
-
-    // Handle URL query updates
-    // const updateQuery = () => {
-    //     const query = new URLSearchParams();
-
-    //     if (sortBy) query.set("sort_by", sortBy);
-    //     if (withStock) query.set("with_stock", withStock);
-    //     if (withType) query.set("with_type", withType);
-    //     if (fromPrice && toPrice) {
-    //         query.set("from_price", fromPrice);
-    //         query.set("to_price", toPrice);
-    //     }
-
-    //     router.push(`${path}?${query.toString()}`);
-
-    //     refetch();
-    // };
 
     useEffect(() => {
         const query = new URLSearchParams();
@@ -76,19 +59,13 @@ const page = ({
         if (toPrice) query.set('to_price', toPrice);
         if (!toPrice) query.delete('to_price');
 
-        const newUrl = `/${path}?${query.toString()}`;
-        // window.history.replaceState(null, '', newUrl);
         router.push(`${path}?${query.toString()}`);
-        // router.replace(`${path}?${query.toString()}`);
-
-        // refetch();
 
     }, [sortBy, withStock, withType, fromPrice, toPrice]);
 
     useEffect(() => {
-        // Refetch data when the URL (or searchParams) changes
         refetch();
-    }, [searchParams]);
+    }, [usearchParams]);
 
     // Handle filter changes
     const handleSortByChange = (value: string) => {
@@ -101,7 +78,6 @@ const page = ({
 
     const handleWithTypeChange = (value: string) => {
         setWithType(withType === value ? null : value);
-        // updateQuery();
     };
 
     const handleFromPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -113,12 +89,6 @@ const page = ({
     };
 
     const applyPriceFilter = () => {
-        // if (fromPrice && toPrice) {
-        //     updateQuery();
-        // } else {
-        //     toast.error("Please enter both 'from' and 'to' price values");
-        // }
-
         if (!fromPrice || !toPrice) {
             toast.error("Please enter both 'from' and 'to' price values");
         }
