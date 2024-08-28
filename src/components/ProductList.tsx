@@ -31,8 +31,12 @@ const ProductList: React.FC<IProductListProps> = ({ isLoading, products, title, 
     return (
         <div className="space-y-8">
             <div>
-                <h1 className="text-2xl font-bold">{title}</h1>
-                <p>{description}</p>
+                <h1 className="text-3xl font-bold leading-[1.1]">
+                    {title}
+                </h1>
+                <p className="leading-normal text-muted-foreground sm:text-lg sm:leading-7">
+                    {description}
+                </p>
             </div>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {products?.map((product, index) =>

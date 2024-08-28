@@ -194,7 +194,7 @@ const SearchButton = () => {
         variant='outline'
         className='relative h-9 w-9 p-0'
       >
-        <Search className='h-4 w-4 xl:mr-2' aria-hidden='true' />        
+        <Search className='h-4 w-4' aria-hidden='true' />        
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput

@@ -100,7 +100,7 @@ const DesktopNav = ({
                     <NavigationMenuLink href="/">Beranda</NavigationMenuLink>
                 </NavigationMenuList>
                 <NavigationMenuList>
-                    <NavigationMenuLink href="/">Produk Terbaru</NavigationMenuLink>
+                    <NavigationMenuLink href="/collections/new-arrival-collections">Produk Terbaru</NavigationMenuLink>
                 </NavigationMenuList>
                 <NavigationMenuList>
                     <NavigationMenuItem>

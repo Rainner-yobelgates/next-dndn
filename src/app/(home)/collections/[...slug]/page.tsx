@@ -16,6 +16,7 @@ import { InputHTMLAttributes, useEffect, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Plus } from "lucide-react"
 import toast from "react-hot-toast"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
 
 const page = ({
@@ -115,9 +116,135 @@ const page = ({
                     Koleksi produk yang tersedia di toko kami
                 </p>
                 {/* Filters Side */}
-                <Button className="sm:hidden mt-5 gap-x-3" onClick={() => console.log('clicked')}>
-                    <span>Filter</span> <Plus />
-                </Button>
+                <Sheet>
+                    <SheetTrigger asChild>
+                        <Button className="lg:hidden mt-5 gap-x-3" onClick={() => console.log('clicked')}>
+                            <span>Filter</span> <Plus />
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent>
+                        {/* <h3 className="text-lg font-bold text-black">Filter</h3> */}
+                        <div className="mt-0">
+                            <AccordionPlus type="single" collapsible className="pr-5 mt-12">
+                                <AccordionItemPlus value="item-1">
+                                    <AccordionTriggerPlus>
+                                        <h4 className="text-base font-bold text-black">Urut Berdasarkan</h4>
+                                    </AccordionTriggerPlus>
+                                    <AccordionContentPlus>
+                                        <ul className="mb-2 space-y-2">
+                                            <li className="text-base text-black space-x-2">
+                                                <Checkbox onCheckedChange={() => handleSortByChange("alpha-asc")} checked={sortBy === "alpha-asc"} />
+                                                <span>Alfabetis, A-Z</span>
+                                            </li>
+                                            <li className="text-base text-black space-x-2">
+                                                <Checkbox onCheckedChange={() => handleSortByChange("alpha-desc")} checked={sortBy === "alpha-desc"} />
+                                                <span>Alfabetis, Z-A</span>
+                                            </li>
+                                            <li className="text-base text-black space-x-2">
+                                                <Checkbox onCheckedChange={() => handleSortByChange("price-asc")} checked={sortBy === "price-asc"} />
+                                                <span>Harga, terendah ke tertinggi</span>
+                                            </li>
+                                            <li className="text-base text-black space-x-2">
+                                                <Checkbox onCheckedChange={() => handleSortByChange("price-desc")} checked={sortBy === "price-desc"} />
+                                                <span>Harga, tertinggi ke terendah</span>
+                                            </li>
+                                            <li className="text-base text-black space-x-2">
+                                                <Checkbox onCheckedChange={() => handleSortByChange("date-asc")} checked={sortBy === "date-asc"} />
+                                                <span>Tanggal, lama ke terbaru</span>
+                                            </li>
+                                            <li className="text-base text-black space-x-2">
+                                                <Checkbox onCheckedChange={() => handleSortByChange("date-desc")} checked={sortBy === "date-desc"} />
+                                                <span>Tanggal, baru ke terlama</span>
+                                            </li>
+                                        </ul>
+                                    </AccordionContentPlus>
+                                </AccordionItemPlus>
+                            </AccordionPlus>
+                        </div>
+                        {/* <div className="mt-4">
+                            <h4 className="text-base font-bold text-black">Filter berdasarkan</h4>
+                        </div> */}
+                        <div className="mt-4">
+                            <AccordionPlus type="single" collapsible className="pr-5">
+                                <AccordionItemPlus value="item-1">
+                                    <AccordionTriggerPlus>
+                                        <h4 className="text-base font-bold text-black">Ketersediaan</h4>
+                                    </AccordionTriggerPlus>
+                                    <AccordionContentPlus>
+                                        <ul className="mb-2 space-y-2">
+                                            <li className="text-base text-black space-x-2">
+                                                <Checkbox onCheckedChange={() => handleWithStockChange('in')} checked={withStock === 'in'} />
+                                                <span>Masih Tersedia</span>
+                                            </li>
+                                            <li className="text-base text-black space-x-2">
+                                                <Checkbox onCheckedChange={() => handleWithStockChange("out")} checked={withStock === 'out'} />
+                                                <span>Tidak Tersedia</span>
+                                            </li>
+                                        </ul>
+                                    </AccordionContentPlus>
+                                </AccordionItemPlus>
+                            </AccordionPlus>
+                        </div>
+                        {slug == 'new-arrival-collections' && (
+                            <div className="mt-4">
+                                <AccordionPlus type="single" collapsible className="pr-5">
+                                    <AccordionItemPlus value="item-1">
+                                        <AccordionTriggerPlus>
+                                            <h4 className="text-base font-bold text-black">Tipe Produk</h4>
+                                        </AccordionTriggerPlus>
+                                        <AccordionContentPlus>
+                                            <ul className="mb-2 space-y-2">
+                                                <li className="text-base text-black space-x-2">
+                                                    <Checkbox onCheckedChange={() => handleWithTypeChange("man")} checked={withType === 'man'} />
+                                                    <span>Pria</span>
+                                                </li>
+                                                <li className="text-base text-black space-x-2">
+                                                    <Checkbox onCheckedChange={() => handleWithTypeChange("woman")} checked={withType === 'woman'} />
+                                                    <span>Wanita</span>
+                                                </li>
+                                            </ul>
+                                        </AccordionContentPlus>
+                                    </AccordionItemPlus>
+                                </AccordionPlus>
+                            </div>
+                        )}
+                        <div className="mt-4">
+                            <AccordionPlus type="single" collapsible className="pr-5">
+                                <AccordionItemPlus value="item-1">
+                                    <AccordionTriggerPlus>
+                                        <h4 className="text-base font-bold text-black">Harga</h4>
+                                    </AccordionTriggerPlus>
+                                    <AccordionContentPlus>
+                                        <div className="grid grid-cols-6 space-y-4 items-start">
+                                            <div className={cn(
+                                                "mt-3 justify-self-start",
+                                                "mt-4",
+                                                "-col-start-7"
+                                            )}>
+                                                <span>Rp</span>
+                                            </div>
+                                            <div className="col-span-5">
+                                                <div className="flex space-x-2 items-center">
+                                                    <Input onChange={handleFromPriceChange} type="number" className="w-1/2" placeholder="dari" min={0} />
+                                                    <Input onChange={handleToPriceChange} type="number" className="w-1/2" placeholder="menjadi" min={0} />
+                                                </div>
+                                                <div className="mt-5 flex justify-between">
+                                                    <Button variant={'outline'}
+                                                        onClick={() => {
+                                                            setFromPrice(null);
+                                                            setToPrice(null);
+                                                        }}
+                                                    >Reset</Button>
+                                                    <Button onClick={applyPriceFilter} >Terapkan</Button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </AccordionContentPlus>
+                                </AccordionItemPlus>
+                            </AccordionPlus>
+                        </div>
+                    </SheetContent>
+                </Sheet>
                 <div className="flex flex-wrap">
                     <div className={cn(
                         "hidden lg:flex flex-col",
@@ -248,7 +375,7 @@ const page = ({
                         </div>
                     </div>
                     {/* List Product Side */}
-                    <div className="lg:w-[70%]">
+                    <div className="w-full lg:w-[70%]">
                         <div className={cn(
                             "mt-12 grid grid-cols-2 gap-y-6 gap-x-3 sm:grid-cols-4 lg:gap-x-8",
                         )}>
