@@ -31,19 +31,19 @@ const Footer = ({ fontClass }: { fontClass: string }) => {
                             }),
                             "px-0",
                         )}>Beranda</Link>
-                        <Link href={'/'} className={cn(
+                        <Link href={'/collections/new-arrival-collections'} className={cn(
                             buttonVariants({
                                 variant: "link",
                             }),
                             "px-0",
                         )}>Produk Terbaru</Link>
-                        <Link href={'/'} className={cn(
+                        <Link href={'#testimoni'} className={cn(
                             buttonVariants({
                                 variant: "link",
                             }),
                             "px-0",
                         )}>Testimoni</Link>
-                        <Link href={'/'} className={cn(
+                        <Link href={'#faq'} className={cn(
                             buttonVariants({
                                 variant: "link",
                             }),
