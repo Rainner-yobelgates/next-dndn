@@ -43,7 +43,7 @@ const MobileNav = () => {
                         </Link>
                         <Link
                             onClick={() => setIsOpen(false)}
-                            href='/collections/new-arrival-collections'
+                            href='#testimoni'
                         >
                             Testimoni
                         </Link>
@@ -95,7 +95,7 @@ const MobileNav = () => {
                         </div>
                         <Link
                             onClick={() => setIsOpen(false)}
-                            href='/'
+                            href='#faq'
                         >
                             Petunjuk & Ketentuan / FAQ 
                         </Link>
