@@ -17,7 +17,6 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 import { SearchProducts } from '@/types/search-products'
 import Image from 'next/image'
-import Link from 'next/link'
 import { Product } from '@/types/product'
 
 const SearchButton = () => {
@@ -157,7 +156,7 @@ const SearchButton = () => {
                   )
                 }
                 onClick={() =>
-                  handleSelect(() =>                    
+                  handleSelect(() =>
                     router.push(
                       `/collections/woman-collections?category=${product.slug}`,
                     ),
@@ -190,19 +189,19 @@ const SearchButton = () => {
           K
         </kbd>
       </Button>
-      <CommandDialog position='top' open={open} onOpenChange={setOpen}>
+      <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput
           value={query}
           onValueChange={setQuery}
           placeholder='Search products...'
         />
-        <CommandList>
+        <CommandList >
           <CommandEmpty
             className={cn(isPending ? 'hidden' : 'py-6 text-center text-sm')}
           >
             No products found.
           </CommandEmpty>
-          {renderSearch()}
+          {renderSearch()}          
         </CommandList>
       </CommandDialog>
     </>
