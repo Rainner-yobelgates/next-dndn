@@ -103,7 +103,7 @@ const SearchButton = () => {
                 <div className="relative lg:w-32 lg:h-32 w-16 h-16 mr-4">
                   <Image
                     src={`https://api.al-miffa.or.id/storage/${product.images![0].path}`}
-                    alt={product.name ?? ''}
+                    alt={product.name + ' Image'}
                     layout="fill"
                     objectFit="cover"
                     className="rounded" // Optional: add rounded corners or other styling
@@ -120,7 +120,7 @@ const SearchButton = () => {
             {data.man_collections?.map((product, index) => (
               <CommandItem
                 key={index}
-                value={product.name}
+                value={product.name + ' Pria'}
                 onSelect={() =>
                   handleSelect(() =>
                     router.push(
@@ -147,7 +147,7 @@ const SearchButton = () => {
             {data.woman_collections?.map((product, index) => (
               <CommandItem
                 key={index}
-                value={product.name}
+                value={product.name + ' Wanita'}
                 onSelect={() =>
                   handleSelect(() =>
                     router.push(
