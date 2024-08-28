@@ -185,7 +185,7 @@ const DesktopNav = ({
                     </NavigationMenuItem>
                 </NavigationMenuList>
                 <NavigationMenuList>
-                    <NavigationMenuLink href="#faq">Syarat & Ketentuan / FAQ</NavigationMenuLink>
+                    <NavigationMenuLink href="/#faq">Syarat & Ketentuan / FAQ</NavigationMenuLink>
                 </NavigationMenuList>
             </NavigationMenu>
         </nav>

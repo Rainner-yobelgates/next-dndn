@@ -37,13 +37,13 @@ const Footer = ({ fontClass }: { fontClass: string }) => {
                             }),
                             "px-0",
                         )}>Produk Terbaru</Link>
-                        <Link href={'#testimoni'} className={cn(
+                        <Link href={'/#testimoni'} className={cn(
                             buttonVariants({
                                 variant: "link",
                             }),
                             "px-0",
                         )}>Testimoni</Link>
-                        <Link href={'#faq'} className={cn(
+                        <Link href={'/#faq'} className={cn(
                             buttonVariants({
                                 variant: "link",
                             }),
