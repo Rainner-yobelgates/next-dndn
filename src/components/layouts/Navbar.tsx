@@ -10,23 +10,27 @@ import useCollectionByWomen from "@/hooks/home/useCollectionByWomen";
 import useBrand from "@/hooks/brand/useBrand";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import useTypeBrand from "@/hooks/brand/useTypeBrand";
+import useCategory from "@/hooks/useCategory";
 
 const Navbar = ({
     logoFont,
 }: {
     logoFont: NextFont;
 }) => {
-    const { data: dataCollectionByMen, isLoading: isLoadingCollectionByMen } = useCollectionByMen();
-    const { data: dataCollectionByWomen, isLoading: isLoadingCollectionByWomen } = useCollectionByWomen();
+    const { data: dataBrandMen, isLoading: isLoadingBrandMen } = useTypeBrand('man');
+    const { data: dataBrandWoman, isLoading: isLoadingBrandWoman } = useTypeBrand('woman');
     const { data: dataBrand, isLoading: isLoadingBrand } = useBrand();
+    const { data: dataCategoryMen, isLoading: isLoadingCategoryMen } = useCategory('man');
+    const { data: dataCategoryWomen, isLoading: isLoadingCategoryWomen } = useCategory('woman');
 
     const [isNavbarVisible, setIsNavbarVisible] = useState(false);
 
     useEffect(() => {
-        if (!isLoadingCollectionByMen && !isLoadingCollectionByWomen && !isLoadingBrand) {
+        if (!isLoadingBrandMen && !isLoadingBrandWoman && !isLoadingBrand && !isLoadingCategoryMen && !isLoadingCategoryWomen) {
             setIsNavbarVisible(true);
         }
-    }, [isLoadingCollectionByMen, isLoadingCollectionByWomen, isLoadingBrand]);
+    }, [isLoadingBrandMen, isLoadingBrandWoman, isLoadingBrand, isLoadingCategoryMen, isLoadingCategoryWomen]);
 
     if (!isNavbarVisible) {
         return null;
@@ -36,7 +40,7 @@ const Navbar = ({
         <motion.header
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.7, ease: "easeInOut" }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
             className={cn(
                 "sticky top-0 z-50 w-full bg-background"
             )}
@@ -64,7 +68,7 @@ const Navbar = ({
                         </a>
                     </div>
                     <MobileNav />
-                    <DekstopNav logoFont={logoFont} dataCollectionByMen={dataCollectionByMen!} dataCollectionByWomen={dataCollectionByWomen!} dataBrand={dataBrand!} />
+                    <DekstopNav logoFont={logoFont} dataBrandMen={dataBrandMen!} dataBrandWomen={dataBrandWoman!} dataBrand={dataBrand!} dataCategoryMen={dataCategoryMen!} dataCategoryWomen={dataCategoryWomen!} />
 
                     <div className="flex justify-end space-x-4">
                         {/* Btn Keranjang & Search */}
