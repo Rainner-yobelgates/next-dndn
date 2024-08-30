@@ -4,9 +4,48 @@ import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet"
 import { Button } from "../ui/button"
 import { Icons } from "../Icons"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion"
+import { Brand } from "@/types/brand"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuPortal, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from "../ui/dropdown-menu"
+import { ChevronDown } from "lucide-react"
+import { AccordionMobile, AccordionMobileItem, AccordionMobileSub, AccordionMobileSubItem } from "../AccordionMobile"
 
-const MobileNav = () => {
+const MobileNav = ({
+    dataBrandMen,
+    dataBrandWomen,
+    dataBrand,
+    dataCategoryMen,
+    dataCategoryWomen
+}: {
+    dataBrandMen: {
+        brand: {
+            id: number
+            name: string
+        }
+    }[],
+    dataBrandWomen: {
+        brand: {
+            id: number
+            name: string
+        }
+    }[],
+    dataBrand: Brand[],
+    dataCategoryMen: {
+        category: {
+            id: number
+            name: string
+            slug: string
+        }
+    }[],
+    dataCategoryWomen: {
+        category: {
+            id: number
+            name: string
+            slug: string
+        }
+    }[]
+}) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
+
 
     return (
         <div className="flex lg:hidden xl:hidden">
@@ -47,57 +86,51 @@ const MobileNav = () => {
                         >
                             Testimoni
                         </Link>
-                        <div className='text-sm'>
-                            <Accordion
-                                type='multiple'
-                                defaultValue={['item-1', 'item-2']}
-                                className='w-full'
-                            >
-                                <AccordionItem value='item-1'>
-                                    <AccordionTrigger>Pria</AccordionTrigger>
-                                    <AccordionContent>
-                                        <div className='flex flex-col gap-y-2 text-muted-foreground'>
-                                            <Link
-                                                onClick={() => setIsOpen(false)}
-                                                href='/collections/man-collections'
-                                            >
-                                                Semua Koleksi Pria
-                                            </Link>
-                                            <Link
-                                                onClick={() => setIsOpen(false)}
-                                                href='/collections/man-collections'
-                                            >
-                                                Semua Brand Khusus Pria
-                                            </Link>
-                                        </div>
-                                    </AccordionContent>
-                                </AccordionItem>
-                                <AccordionItem value='item-2'>
-                                    <AccordionTrigger>Wanita</AccordionTrigger>
-                                    <AccordionContent>
-                                        <div className='flex flex-col gap-y-2 text-muted-foreground'>
-                                            <Link
-                                                onClick={() => setIsOpen(false)}
-                                                href='/collections/woman-collections'
-                                            >
-                                                Semua Koleksi Wanita
-                                            </Link>
-                                            <Link
-                                                onClick={() => setIsOpen(false)}
-                                                href='/collections/woman-collections'
-                                            >
-                                                Semua Brand Khusus Wanita
-                                            </Link>
-                                        </div>
-                                    </AccordionContent>
-                                </AccordionItem>
-                            </Accordion>
-                        </div>
+                        <AccordionMobile title="Pria">
+                            <AccordionMobileSub title="Semua Kategori Pria">
+                                {dataCategoryMen.map((category, index) => (
+                                    <AccordionMobileSubItem key={index}>
+                                        <Link href={`/collections/man-collections?category=${category.category.slug}`}>
+                                            {category.category.name}
+                                        </Link>
+                                    </AccordionMobileSubItem>
+                                ))}
+                            </AccordionMobileSub>
+                            <AccordionMobileSub title="Semua Brand Pria">
+                                {dataBrandMen.map((data, index) => (
+                                    <AccordionMobileSubItem key={index}>
+                                        <Link href={`/collections/man-collections?brand=${data.brand.name}`}>
+                                            {data.brand.name}
+                                        </Link>
+                                    </AccordionMobileSubItem>
+                                ))}
+                            </AccordionMobileSub>
+                        </AccordionMobile>
+                        <AccordionMobile title="Wanita">
+                            <AccordionMobileSub title="Semua Kategori Wanita">
+                                {dataCategoryWomen.map((category, index) => (
+                                    <AccordionMobileSubItem key={index}>
+                                        <Link href={`/collections/man-collections?category=${category.category.slug}`}>
+                                            {category.category.name}
+                                        </Link>
+                                    </AccordionMobileSubItem>
+                                ))}
+                            </AccordionMobileSub>
+                            <AccordionMobileSub title="Semua Brand Wanita">
+                                {dataBrandWomen.map((data, index) => (
+                                    <AccordionMobileSubItem key={index}>
+                                        <Link href={`/collections/man-collections?brand=${data.brand.name}`}>
+                                            {data.brand.name}
+                                        </Link>
+                                    </AccordionMobileSubItem>
+                                ))}
+                            </AccordionMobileSub>
+                        </AccordionMobile>
                         <Link
                             onClick={() => setIsOpen(false)}
                             href='/#faq'
                         >
-                            Petunjuk & Ketentuan / FAQ 
+                            Petunjuk & Ketentuan / FAQ
                         </Link>
                     </div>
                 </SheetContent>

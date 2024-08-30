@@ -67,7 +67,7 @@ const Navbar = ({
                             <span>DNDN</span>
                         </a>
                     </div>
-                    <MobileNav />
+                    <MobileNav dataBrandMen={dataBrandMen!} dataBrandWomen={dataBrandWoman!} dataBrand={dataBrand!} dataCategoryMen={dataCategoryMen!} dataCategoryWomen={dataCategoryWomen!} />
                     <DekstopNav logoFont={logoFont} dataBrandMen={dataBrandMen!} dataBrandWomen={dataBrandWoman!} dataBrand={dataBrand!} dataCategoryMen={dataCategoryMen!} dataCategoryWomen={dataCategoryWomen!} />
 
                     <div className="flex justify-end space-x-4">

@@ -118,7 +118,7 @@ const page = ({
                 {/* Filters Side */}
                 <Sheet>
                     <SheetTrigger asChild>
-                        <Button className="lg:hidden mt-5 gap-x-3" onClick={() => console.log('clicked')}>
+                        <Button className="lg:hidden mt-5 gap-x-3 bg-primary" onClick={() => console.log('clicked')}>
                             <span>Filter</span> <Plus />
                         </Button>
                     </SheetTrigger>
