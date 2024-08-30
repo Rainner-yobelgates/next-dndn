@@ -22,9 +22,12 @@ const Summary = () => {
           .map((item) => (
             `Nama Produk : ${item.name}\n` +
             `Harga       : ${formatPrice(item.price as number)}\n` +
-            `Jumlah      : ${cart.getQuantity(item.id!)}\n` +
+            `Jumlah      : ${cart.getQuantity(item)}\n` +
             `Brand       : ${item.brand!.name}\n` +
-            `Subtotal    : ${formatPrice((item.price as number) * cart.getQuantity(item.id!))}\n` +
+            `${item.variants?.map((variant) => variant.combinations.map(
+              (combination) => `Variant     : ${combination.value.value}\n`),
+            )}` +
+            `Subtotal    : ${formatPrice((item.price as number) * cart.getQuantity(item))}\n` +
             `Link Produk : ${currentUrl}/product/${item.slug}`
           )).join('\n\n')}\n\n` +
         `Total Pembelian : ${formatPrice(totalPrice)}\n\n` +
