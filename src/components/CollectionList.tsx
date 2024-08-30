@@ -72,12 +72,12 @@ const CollectionList: React.FC<CollectionListProps> = ({ title, description, pro
                     </p>
                 </div>
                 <div className="space-x-4">
-                    <button onClick={() => api?.scrollTo(current - 1)}>
+                    <button onClick={() => api?.scrollPrev()}>
                         {/* {api?.canScrollPrev() ?
                             <ArrowLeft /> : <ArrowLeft className="text-gray-400" />} */}
                         <ArrowLeft />
                     </button>
-                    <button onClick={() => api?.scrollTo(current + 1)}>
+                    <button onClick={() => api?.scrollNext()}>
                         {/* {api?.canScrollNext() ?
                             <ArrowRight /> : <ArrowRight className="text-gray-400" />} */}
                         <ArrowRight />
@@ -97,64 +97,7 @@ const CollectionList: React.FC<CollectionListProps> = ({ title, description, pro
                         <CarouselItem className="md:basis-1/2 lg:basis-1/3">
                             <ProductCard product={product} />
                         </CarouselItem>
-                    ))}
-                    {/* <CarouselItem className="md:basis-1/2 lg:basis-1/3">
-                        <ProductCard product={{
-                            id: '1',
-                            description: 'Baju Arsenal',
-                            Store: {
-                                name: 'Store',
-                            },
-                            name: 'Baju Arsenal',
-                            price: "100000",
-                            Category: {
-                                name: 'Baju'
-                            },
-                            images: [{
-                                url: 'https://api.al-miffa.or.id/storage/products/W9XNcWZJ7J0ikmSy-3TZjTFRLWWeseKZK-G4MuwuvyRygjEcrl.webp'
-                            }],
-                            slug: 'slug',
-                            storeId: '1',
-                        }} />
-                    </CarouselItem> */}
-                    {/* <CarouselItem className="md:basis-1/2 lg:basis-1/3">
-                        <ProductCard product={{
-                            id: '2',
-                            description: 'Bitcoin',
-                            Store: {
-                                name: 'Store',
-                            },
-                            name: 'Bitcoin',
-                            price: "100000",
-                            Category: {
-                                name: 'Aksesoris'
-                            },
-                            images: [{
-                                url: 'https://api.al-miffa.or.id/storage/products/9EveQBIbm3xDUJag-GIDDNkGm7vU3WWsL-8LUYmQQPttOmfXAv.webp'
-                            }],
-                            slug: 'slug',
-                            storeId: '1',
-                        }} />
-                    </CarouselItem>
-                    <CarouselItem className="md:basis-1/2 lg:basis-1/3">
-                        <ProductCard product={{
-                            id: '1',
-                            description: 'Baju Arsenal',
-                            Store: {
-                                name: 'Store',
-                            },
-                            name: 'Baju Arsenal',
-                            price: "100000",
-                            Category: {
-                                name: 'Baju'
-                            },
-                            images: [{
-                                url: 'https://api.al-miffa.or.id/storage/products/W9XNcWZJ7J0ikmSy-3TZjTFRLWWeseKZK-G4MuwuvyRygjEcrl.webp'
-                            }],
-                            slug: 'slug',
-                            storeId: '1',
-                        }} />
-                    </CarouselItem> */}
+                    ))}                    
                 </CarouselContent>
                 {/* <CarouselPrevious /> */}
                 {/* <CarouselNext /> */}
