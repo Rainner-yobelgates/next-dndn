@@ -17,7 +17,7 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
   const cart = useCart()
 
   const onRemove = () => {
-    cart.removeItem(data.id!)
+    cart.removeItem(data)
   }
 
   return (
@@ -52,7 +52,7 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
           </div>
 
           {/* @ts-expect-error Decimal type */}
-          {formatPrice(parseFloat(data.price))} x {cart.getQuantity(data.id)}
+          {formatPrice(parseFloat(data.price))} x {cart.getQuantity(data)}
         </div>
       </div>
     </li>

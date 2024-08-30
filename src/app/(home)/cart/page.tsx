@@ -21,7 +21,7 @@ const page = () => {
         return <CartSkeleton />
     }
 
-    console.log(cart)
+    console.log(cart.getItems())
 
     return (
         <div className="container py-16">
@@ -41,8 +41,8 @@ const page = () => {
                             </div>
                         )}
                         <ul>
-                            {cart.getItems().map((item) => (
-                                <CartItem key={item.id} data={item} />
+                            {cart.getItems().map((item, index) => (
+                                <CartItem key={index} data={item} />
                             ))}
                         </ul>
                     </div>
