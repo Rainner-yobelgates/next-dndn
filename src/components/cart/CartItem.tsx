@@ -51,9 +51,17 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
             </p>
           </div>
 
-          {/* @ts-expect-error Decimal type */}
-          {formatPrice(parseFloat(data.price))} x {cart.getQuantity(data)}
+          <div className='flex flex-col'>
+            {/* @ts-expect-error Decimal type */}
+            <span>{formatPrice(parseFloat(data.price))} x {cart.getQuantity(data)}</span>
+            {data.variants?.map((variant) => (
+              variant.combinations?.map((combination) =>
+                combination.value.value,
+              )
+            ).join(', '))}
+          </div>
         </div>
+
       </div>
     </li>
   )
