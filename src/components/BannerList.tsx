@@ -36,14 +36,17 @@ const BannerList: React.FC<IBannerListProps> = ({ banners, isLoading }) => {
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5, ease: "easeOut" }}
                         >
-                            <Card className="border-none">
+                            <Card className="border-none h-[400px]">
                                 <CardContent className="p-0">
                                     <Image
                                         src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/storage/${banner.path}`}
                                         alt={`banner-${index}`}
                                         width={800}
                                         height={400}
-                                        className="w-full h-auto object-cover"
+                                        className="w-full object-cover"
+                                        priority={false}
+                                        placeholder="blur"
+                                        blurDataURL="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Crect%20width='16'%20height='16'%20fill='%23e5e7eb'/%3E%3C/svg%3E"
                                     />
                                 </CardContent>
                             </Card>

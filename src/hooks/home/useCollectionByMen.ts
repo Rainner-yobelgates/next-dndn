@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 
 const useCollectionByMen = () => {
     return useQuery({
-        queryKey: ['collection', 'women'],
+        queryKey: ['collection', 'men'],
         queryFn: async () => {
             const res = await api.get('/collections/man');
             return res.data.payload as Product[];

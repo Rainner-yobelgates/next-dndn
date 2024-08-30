@@ -52,7 +52,7 @@ const CollectionList: React.FC<CollectionListProps> = ({ title, description, pro
                 <div className="">
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                         {Array.from({ length: 3 }).map((_, i) => (
-                            <ProductCardSkeleton />
+                            <ProductCardSkeleton key={i} />
                         ))}
                     </div>
                 </div>
@@ -93,8 +93,8 @@ const CollectionList: React.FC<CollectionListProps> = ({ title, description, pro
                 className="w-full max-w-full"
             >
                 <CarouselContent>
-                    {products?.map((product) => (
-                        <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                    {products?.map((product, index) => (
+                        <CarouselItem className="md:basis-1/2 lg:basis-1/3" key={index}>
                             <ProductCard product={product} />
                         </CarouselItem>
                     ))}                    

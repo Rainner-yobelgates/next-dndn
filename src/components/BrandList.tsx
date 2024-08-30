@@ -27,7 +27,7 @@ const BrandList: React.FC<IBrandProps> = ({ data, isLoading }) => {
                             <Image src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/storage/${value.logo}`} alt="reviews"
                                 fill
                                 sizes='200'
-                                className='aspect-square object-cover rounded-md'
+                                className='aspect-square object-contain rounded-md'
                             />
                         </div>
                     </div>
