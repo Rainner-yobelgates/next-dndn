@@ -64,6 +64,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/storage/${product.images[0].path}`}
             fill
             sizes='200'
+            fetchPriority="high"
+            decoding="async"
+            priority
             // @ts-ignore
             alt={product.name}
             className='aspect-square object-cover rounded-md'
