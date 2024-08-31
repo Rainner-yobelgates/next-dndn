@@ -36,25 +36,45 @@ const BannerList: React.FC<IBannerListProps> = ({ banners, isLoading }) => {
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5, ease: "easeOut" }}
                         >
-                            <Card className="border-none h-[400px]">
+                            <Card className="border-none relative aspect-[1080/424] bg-black">
                                 <CardContent className="p-0">
-                                    <div className="relative aspect-[1080/424]">
-                                        <Image
-                                            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/storage/${banner.path}`}
-                                            alt={`banner-${index}`}
-                                            fetchPriority="high"
-                                            decoding="async"
-                                            fill
-                                            priority
-                                            sizes="100vw"
-                                            className="w-full object-cover h-full"
+                                    <Image
+                                        src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/storage/${banner.path}`}
+                                        alt={`banner-${index}`}
+                                        fetchPriority="high"
+                                        decoding="async"
+                                        priority
+                                        fill
+                                        // width={800}
+                                        // height={500}
+                                        style={{
+                                            objectFit: "cover"
+                                        }}
+                                    />
+                                    {/* <div className="relative aspect-[1080/424]"> */}
+                                    {/* <Image
+                                        // src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/storage/${banner.path}`}
+                                        // alt={`banner-${index}`}                                            
+                                        // fill
+                                        // style={{ 
+                                        //     objectFit: "fill" 
+                                        // }}
+                                        // -
+                                        // fetchPriority="high"
+                                        // decoding="async"
+                                        // fill
+                                        // priority
+                                        // quality={100}
+                                        // className="w-full object-contain h-full"
+                                        // -
+                                        // sizes="100vw"
                                         // width={800}
                                         // height={400}
                                         // priority={false}
                                         // placeholder="blur"
                                         // blurDataURL="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Crect%20width='16'%20height='16'%20fill='%23e5e7eb'/%3E%3C/svg%3E"
-                                        />
-                                    </div>
+                                        /> */}
+                                    {/* </div> */}
                                 </CardContent>
                             </Card>
                         </motion.div>
